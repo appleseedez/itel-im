@@ -15,7 +15,6 @@
 		BA26C79E1829DD2700C5CD39 /* IMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BA26C79D1829DD2700C5CD39 /* IMAppDelegate.m */; };
 		BA26C7A11829DD2700C5CD39 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA26C79F1829DD2700C5CD39 /* Main_iPhone.storyboard */; };
 		BA26C7A41829DD2700C5CD39 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA26C7A21829DD2700C5CD39 /* Main_iPad.storyboard */; };
-		BA26C7A71829DD2700C5CD39 /* IMRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA26C7A61829DD2700C5CD39 /* IMRootViewController.m */; };
 		BA26C7A91829DD2700C5CD39 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA26C7A81829DD2700C5CD39 /* Images.xcassets */; };
 		BA26C7B01829DD2800C5CD39 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA26C7AF1829DD2800C5CD39 /* XCTest.framework */; };
 		BA26C7B11829DD2800C5CD39 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA26C78D1829DD2700C5CD39 /* Foundation.framework */; };
@@ -73,6 +72,8 @@
 		BAAA12AE183E10050021C60D /* IMSessionPeriodRequestMessageBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAA12AC183E10050021C60D /* IMSessionPeriodRequestMessageBuilder.m */; };
 		BAAA12B1183E7A770021C60D /* IMSessionPeriodResponseMessageBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAA12B0183E7A770021C60D /* IMSessionPeriodResponseMessageBuilder.m */; };
 		BAAA12B2183E7A770021C60D /* IMSessionPeriodResponseMessageBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAA12B0183E7A770021C60D /* IMSessionPeriodResponseMessageBuilder.m */; };
+		BAAA12B5183EDD250021C60D /* IMHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAA12B4183EDD250021C60D /* IMHomeViewController.m */; };
+		BAAA12B6183EDD250021C60D /* IMHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAA12B4183EDD250021C60D /* IMHomeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,8 +119,6 @@
 		BA26C79D1829DD2700C5CD39 /* IMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMAppDelegate.m; sourceTree = "<group>"; };
 		BA26C7A01829DD2700C5CD39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		BA26C7A31829DD2700C5CD39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		BA26C7A51829DD2700C5CD39 /* IMRootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMRootViewController.h; sourceTree = "<group>"; };
-		BA26C7A61829DD2700C5CD39 /* IMRootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMRootViewController.m; sourceTree = "<group>"; };
 		BA26C7A81829DD2700C5CD39 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BA26C7AE1829DD2800C5CD39 /* imTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = imTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA26C7AF1829DD2800C5CD39 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -184,6 +183,8 @@
 		BAAA12AC183E10050021C60D /* IMSessionPeriodRequestMessageBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMSessionPeriodRequestMessageBuilder.m; sourceTree = "<group>"; };
 		BAAA12AF183E7A770021C60D /* IMSessionPeriodResponseMessageBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMSessionPeriodResponseMessageBuilder.h; sourceTree = "<group>"; };
 		BAAA12B0183E7A770021C60D /* IMSessionPeriodResponseMessageBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMSessionPeriodResponseMessageBuilder.m; sourceTree = "<group>"; };
+		BAAA12B3183EDD250021C60D /* IMHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMHomeViewController.h; sourceTree = "<group>"; };
+		BAAA12B4183EDD250021C60D /* IMHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMHomeViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -304,8 +305,6 @@
 				BA26C79D1829DD2700C5CD39 /* IMAppDelegate.m */,
 				BA26C79F1829DD2700C5CD39 /* Main_iPhone.storyboard */,
 				BA26C7A21829DD2700C5CD39 /* Main_iPad.storyboard */,
-				BA26C7A51829DD2700C5CD39 /* IMRootViewController.h */,
-				BA26C7A61829DD2700C5CD39 /* IMRootViewController.m */,
 				BA26C7A81829DD2700C5CD39 /* Images.xcassets */,
 				BA26C7941829DD2700C5CD39 /* Supporting Files */,
 			);
@@ -346,6 +345,8 @@
 		BA26C7C51829DDB100C5CD39 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				BAAA12B3183EDD250021C60D /* IMHomeViewController.h */,
+				BAAA12B4183EDD250021C60D /* IMHomeViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -683,12 +684,12 @@
 				BA77661F183C9F8A00F48419 /* NSData+Byte.m in Sources */,
 				BAAA12AD183E10050021C60D /* IMSessionPeriodRequestMessageBuilder.m in Sources */,
 				BA7765C3183C170500F48419 /* IMDataPool.m in Sources */,
+				BAAA12B5183EDD250021C60D /* IMHomeViewController.m in Sources */,
 				BA7765B7183C0B1400F48419 /* IMTCPCommunicator.m in Sources */,
 				BA77661A183C92C000F48419 /* NSString+MD5.m in Sources */,
 				BA7765BB183C0ED000F48419 /* IMSessionInitMessageBuilder.m in Sources */,
 				BA795AEA183BF93E00466D8E /* IMManagerImp.m in Sources */,
 				BA776627183CC11E00F48419 /* IMSeqenceGen.m in Sources */,
-				BA26C7A71829DD2700C5CD39 /* IMRootViewController.m in Sources */,
 				BA26C79E1829DD2700C5CD39 /* IMAppDelegate.m in Sources */,
 				BAAA12B1183E7A770021C60D /* IMSessionPeriodResponseMessageBuilder.m in Sources */,
 				BA7765BF183C132800F48419 /* IMMessageParserImp.m in Sources */,
@@ -703,6 +704,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA7765B8183C0B1400F48419 /* IMTCPCommunicator.m in Sources */,
+				BAAA12B6183EDD250021C60D /* IMHomeViewController.m in Sources */,
 				BAAA12B2183E7A770021C60D /* IMSessionPeriodResponseMessageBuilder.m in Sources */,
 				BA7765C4183C170500F48419 /* IMDataPool.m in Sources */,
 				BA776628183CC11E00F48419 /* IMSeqenceGen.m in Sources */,

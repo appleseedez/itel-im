@@ -33,5 +33,4 @@
 @property (nonatomic) id<IMMessageParser> messageParser;
 
 
-- (void) testSessionStart:(NSString*) destAccount;
 @end

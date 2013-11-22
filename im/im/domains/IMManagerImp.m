@@ -207,6 +207,8 @@
     self.state = IDLE;
 }
 
-
+- (void)dial:(NSString *)account{
+    [self testSessionStart:account];
+}
 
 @end
