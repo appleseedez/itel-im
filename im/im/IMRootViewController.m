@@ -23,15 +23,5 @@
     
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-- (IBAction)dial:(UIButton *)sender {
-    NSString* itelNumber =  self.numberField.text;
-    NSLog(@"号码是: %@",itelNumber);
-    
-}
 @end

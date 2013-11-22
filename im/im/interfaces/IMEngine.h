@@ -18,9 +18,9 @@
 //获取本机端点地址
 - (NSDictionary*) endPointAddress;
 //获取p2p通道
-- (int) tunnel;
+- (int) tunnelWith:(NSDictionary*) params;
 //开始传输
-- (void) startTransport;
+- (BOOL) startTransport;
 //终止传输
 - (void) stopTransport;
 //开启远端视频输入窗口

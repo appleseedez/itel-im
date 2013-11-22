@@ -15,6 +15,8 @@
 #import "IMMessageBuilder.h"
 #import "IMSessionInitMessageBuilder.h"
 #import "IMAuthMessageBuilder.h"
+#import "IMSessionPeriodRequestMessageBuilder.h"
+#import "IMSessionPeriodResponseMessageBuilder.h"
 #import "IMMessageParser.h"
 #import "IMMessageParserImp.h"
 #import "IMDataPool.h"
@@ -31,5 +33,5 @@
 @property (nonatomic) id<IMMessageParser> messageParser;
 
 
-- (void) testSessionStart;
+- (void) testSessionStart:(NSString*) destAccount;
 @end

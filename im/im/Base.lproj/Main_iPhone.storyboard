@@ -1,48 +1,66 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="YBa-is-11m">
     <dependencies>
         <deployment defaultVersion="1552" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
-        <scene sceneID="ufC-wZ-h7g">
+        <!--Root View Controller - 拨号盘-->
+        <scene sceneID="yMf-Wl-xKg">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="IMRootViewController" sceneMemberID="viewController">
+                <viewController id="fH8-M0-Ofe" customClass="IMRootViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="fMK-MH-6dE"/>
-                        <viewControllerLayoutGuide type="bottom" id="bCU-FH-33T"/>
+                        <viewControllerLayoutGuide type="top" id="Qmr-Xk-WGC"/>
+                        <viewControllerLayoutGuide type="bottom" id="ViU-g5-N5a"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                    <view key="view" contentMode="scaleToFill" id="h4e-gf-oMB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1234567" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jlz-e5-Mft">
-                                <rect key="frame" x="69" y="151" width="105" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vHt-Ga-TKy">
-                                <rect key="frame" x="115" y="439" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="dial">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="dial:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="zpd-u6-Jua"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <connections>
-                        <outlet property="numberField" destination="jlz-e5-Mft" id="mm9-Ja-tFA"/>
-                    </connections>
+                    <tabBarItem key="tabBarItem" title="拨号盘" id="URO-Ah-dF7"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7cd-E3-HZV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="644" y="-186"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="dbk-k6-Be7">
+            <objects>
+                <tabBarController definesPresentationContext="YES" id="YBa-is-11m" sceneMemberID="viewController">
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="Jnb-sp-E3y">
+                        <rect key="frame" x="129" y="330" width="163" height="49"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="fH8-M0-Ofe" kind="relationship" relationship="viewControllers" id="fpa-re-Val"/>
+                        <segue destination="4VD-gu-90e" kind="relationship" relationship="viewControllers" id="PRb-UD-vsv"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RCn-Vb-lfb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="110" y="141"/>
+        </scene>
+        <!--View Controller - 联系人-->
+        <scene sceneID="IPz-Gj-1Pm">
+            <objects>
+                <viewController id="4VD-gu-90e" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4k2-he-eDF"/>
+                        <viewControllerLayoutGuide type="bottom" id="eZG-eo-d0C"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WdC-c2-J3d">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="联系人" id="gFd-o6-uli"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kxM-RL-doP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="644" y="467"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

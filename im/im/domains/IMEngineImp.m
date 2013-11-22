@@ -87,17 +87,37 @@ UIImageView* _pview_local;
     //获取本机外网ip和端口
     self.pInterfaceApi->GetSelfInterAddr(PROBE_SERVER, PROBE_PORT, self_inter_ip, self_inter_port);
     return @{
-             SELF_INTER_IP_KEY: [NSString stringWithUTF8String:self_inter_ip],
-             SELF_INTER_PORT_KEY:[NSNumber numberWithInt:self_inter_port],
-             SELF_LOCAL_IP_KEY:[[self class] localAddress],
-             SELF_LOCAL_PORT_KEY:[NSNumber numberWithInt:22222]
+            SESSION_PERIOD_FIELD_PEER_INTER_IP_KEY: [NSString stringWithUTF8String:self_inter_ip],
+             SESSION_PERIOD_FIELD_PEER_INTER_PORT_KEY:[NSNumber numberWithInt:self_inter_port],
+             SESSION_PERIOD_FIELD_PEER_LOCAL_IP_KEY:[[self class] localAddress],
+             SESSION_PERIOD_FIELD_PEER_LOCAL_PORT_KEY:[NSNumber numberWithInt:22222]
              };
 }
 
-- (int)tunnel{
+- (int)tunnelWith:(NSDictionary*) params{
+     TP2PPeerArgc argc;
+    
+    
+    // 外网地址
+    ::strncpy(argc.otherInterIP, [[params valueForKey:SESSION_PERIOD_FIELD_PEER_INTER_IP_KEY] UTF8String], sizeof(argc.otherInterIP));
+    argc.otherInterPort = [[params valueForKey:SESSION_PERIOD_FIELD_PEER_INTER_PORT_KEY] intValue];
+    // 内网地址
+    ::strncpy(argc.otherLocalIP, [[params valueForKey:SESSION_PERIOD_FIELD_PEER_LOCAL_IP_KEY] UTF8String], sizeof(argc.otherLocalIP));
+    argc.otherLocalPort =  [[params valueForKey:SESSION_PERIOD_FIELD_PEER_LOCAL_PORT_KEY] intValue];
+    // 转发地址
+    ::strncpy(argc.otherForwardIP,[[params valueForKey:SESSION_INIT_RES_FIELD_FORWARD_IP_KEY] UTF8String], sizeof(argc.otherForwardIP));
+    argc.otherForwardPort = [[params valueForKey:SESSION_INIT_RES_FIELD_FORWARD_PORT_KEY] intValue];
+    
+    // 对方的ssid
+    argc.otherSsid = [[params valueForKey:SESSION_INIT_RES_FIELD_SSID_KEY] intValue]+1;
+    // 自己的ssid
+    argc.selfSsid = [[params valueForKey:SESSION_INIT_RES_FIELD_SSID_KEY] intValue];
+    
+    
     return 0;
 }
-- (void)startTransport{
+- (BOOL)startTransport{
+    return NO;
 }
 
 - (void)stopTransport{

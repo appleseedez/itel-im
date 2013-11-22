@@ -9,7 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface IMRootViewController : UIViewController
-- (IBAction)dial:(UIButton *)sender;
-@property (weak, nonatomic) IBOutlet UILabel *numberField;
 
 @end

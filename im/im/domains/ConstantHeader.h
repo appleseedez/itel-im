@@ -14,7 +14,8 @@
 
 #define DATA_RECEIVED_NOTIFICATION @"DATA_RECEIVED_NOTIFICATION" // 收到通知标识
 #define SESSION_INITED_NOTIFICATION @"SESSION_INITED_NOTIFICATION" // 收到通话查询响应
-#define SESSION_PERIOD_NOTIFICATION @"SESSION_PERIOD_NOTIFICATION" // 收到通话接受
+#define SESSION_PERIOD_REQ_NOTIFICATION @"SESSION_PERIOD_REQ_NOTIFICATION" // 收到通话请求
+#define SESSION_PERIOD_RES_NOTIFICATION @"SESSION_PERIOD_RES_NOTIFICATION" // 收到通话响应
 #define CMID_APP_LOGIN_SSS_NOTIFICATION @"CMID_APP_LOGIN_SSS_NOTIFICATION" // 收到信令服务器验证回复
 
 #define HEAD_SECTION_KEY @"head"
@@ -22,6 +23,25 @@
 #define DATA_TYPE_KEY @"type"
 #define DATA_STATUS_KEY @"status"
 #define DATA_SEQ_KEY @"seq"
+
+
+// 信令服务器认证信令字段
+#define CMID_APP_LOGIN_SSS_REQ_FIELD_ACCOUNT_KEY @"account"
+#define CMID_APP_LOGIN_SSS_REQ_FIELD_CERT_KEY @"keys"
+
+// 通话查询信令字段
+#define SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY @"destAccount" // 请求: destAccount
+
+#define SESSION_INIT_RES_FIELD_SSID_KEY @"ssid" // 回复: ssid
+#define SESSION_INIT_RES_FIELD_FORWARD_IP_KEY @"forwardIP" // 回复： forwardIP
+#define SESSION_INIT_RES_FIELD_FORWARD_PORT_KEY @"forwardPort" // 回复： forwardIP
+
+// 通话信令字段
+#define SESSION_PERIOD_FIELD_PEER_NAT_TYPE_KEY @"peerNATType" //发送给对方的，本机的NAT类型
+#define SESSION_PERIOD_FIELD_PEER_INTER_IP_KEY @"peerInterIP"
+#define SESSION_PERIOD_FIELD_PEER_INTER_PORT_KEY @"peerInterPort"
+#define SESSION_PERIOD_FIELD_PEER_LOCAL_IP_KEY @"peerLocalIP"
+#define SESSION_PERIOD_FIELD_PEER_LOCAL_PORT_KEY @"peerLocalPort"
 
 #define SEQ_BASE 0 // 发送包的序列号基底
 #define HEART_BEAT_INTERVAL 15 // 心跳间隔15秒
@@ -55,11 +75,6 @@
 #define PROBE_SERVER "118.123.7.92"
 #define PROBE_PORT 11111
 
-#define SELF_INTER_IP_KEY @"peerInterIP"
-#define SELF_INTER_PORT_KEY @"peerInterPort"
-#define SELF_LOCAL_IP_KEY @"peerLocalIP"
-#define SELF_LOCAL_PORT_KEY @"peerLocalPort"
-#define SELF_FORWARD_IP_KEY @"peerForwardIP"
-#define SELF_FORWARD_PORT_KEY @"peerForwardPort"
+
 
 #endif

@@ -69,6 +69,10 @@
 		BA795B02183C01CC00466D8E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA795B01183C01CC00466D8E /* AudioToolbox.framework */; };
 		BA795B04183C01DC00466D8E /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA795B03183C01DC00466D8E /* OpenGLES.framework */; };
 		BA795B06183C01E300466D8E /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA795B05183C01E300466D8E /* CoreVideo.framework */; };
+		BAAA12AD183E10050021C60D /* IMSessionPeriodRequestMessageBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAA12AC183E10050021C60D /* IMSessionPeriodRequestMessageBuilder.m */; };
+		BAAA12AE183E10050021C60D /* IMSessionPeriodRequestMessageBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAA12AC183E10050021C60D /* IMSessionPeriodRequestMessageBuilder.m */; };
+		BAAA12B1183E7A770021C60D /* IMSessionPeriodResponseMessageBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAA12B0183E7A770021C60D /* IMSessionPeriodResponseMessageBuilder.m */; };
+		BAAA12B2183E7A770021C60D /* IMSessionPeriodResponseMessageBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAA12B0183E7A770021C60D /* IMSessionPeriodResponseMessageBuilder.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,6 +180,10 @@
 		BA795B01183C01CC00466D8E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		BA795B03183C01DC00466D8E /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BA795B05183C01E300466D8E /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		BAAA12AB183E10050021C60D /* IMSessionPeriodRequestMessageBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMSessionPeriodRequestMessageBuilder.h; sourceTree = "<group>"; };
+		BAAA12AC183E10050021C60D /* IMSessionPeriodRequestMessageBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMSessionPeriodRequestMessageBuilder.m; sourceTree = "<group>"; };
+		BAAA12AF183E7A770021C60D /* IMSessionPeriodResponseMessageBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMSessionPeriodResponseMessageBuilder.h; sourceTree = "<group>"; };
+		BAAA12B0183E7A770021C60D /* IMSessionPeriodResponseMessageBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMSessionPeriodResponseMessageBuilder.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -431,23 +439,16 @@
 		BA795AE5183BF61A00466D8E /* domains */ = {
 			isa = PBXGroup;
 			children = (
+				BAAA12AA183E0FC20021C60D /* messageParser */,
+				BAAA12A9183E0FB10021C60D /* messageBuilder */,
+				BAAA12A8183E0F950021C60D /* manager */,
+				BAAA12A7183E0F720021C60D /* communicator */,
+				BAAA12A6183E0F690021C60D /* engine */,
 				BA77661D183C9F8A00F48419 /* NSData+Byte.h */,
 				BA77661E183C9F8A00F48419 /* NSData+Byte.m */,
-				BA795AE8183BF93E00466D8E /* IMManagerImp.h */,
-				BA795AE9183BF93E00466D8E /* IMManagerImp.m */,
-				BA7765B0183C05C200F48419 /* IMEngineImp.h */,
-				BA7765B1183C05C200F48419 /* IMEngineImp.m */,
-				BA7765B5183C0B1400F48419 /* IMTCPCommunicator.h */,
-				BA7765B6183C0B1400F48419 /* IMTCPCommunicator.m */,
-				BA7765B9183C0ED000F48419 /* IMSessionInitMessageBuilder.h */,
-				BA7765BA183C0ED000F48419 /* IMSessionInitMessageBuilder.m */,
-				BA7765BD183C132800F48419 /* IMMessageParserImp.h */,
-				BA7765BE183C132800F48419 /* IMMessageParserImp.m */,
 				BA7765C1183C170500F48419 /* IMDataPool.h */,
 				BA7765C2183C170500F48419 /* IMDataPool.m */,
 				BA7765C6183C623200F48419 /* ConstantHeader.h */,
-				BA776621183CBE7B00F48419 /* IMAuthMessageBuilder.h */,
-				BA776622183CBE7B00F48419 /* IMAuthMessageBuilder.m */,
 				BA776625183CC11E00F48419 /* IMSeqenceGen.h */,
 				BA776626183CC11E00F48419 /* IMSeqenceGen.m */,
 			);
@@ -476,6 +477,57 @@
 				BA795AF4183BFFF200466D8E /* render_view.h */,
 			);
 			path = sdk;
+			sourceTree = "<group>";
+		};
+		BAAA12A6183E0F690021C60D /* engine */ = {
+			isa = PBXGroup;
+			children = (
+				BA7765B0183C05C200F48419 /* IMEngineImp.h */,
+				BA7765B1183C05C200F48419 /* IMEngineImp.m */,
+			);
+			name = engine;
+			sourceTree = "<group>";
+		};
+		BAAA12A7183E0F720021C60D /* communicator */ = {
+			isa = PBXGroup;
+			children = (
+				BA7765B5183C0B1400F48419 /* IMTCPCommunicator.h */,
+				BA7765B6183C0B1400F48419 /* IMTCPCommunicator.m */,
+			);
+			name = communicator;
+			sourceTree = "<group>";
+		};
+		BAAA12A8183E0F950021C60D /* manager */ = {
+			isa = PBXGroup;
+			children = (
+				BA795AE8183BF93E00466D8E /* IMManagerImp.h */,
+				BA795AE9183BF93E00466D8E /* IMManagerImp.m */,
+			);
+			name = manager;
+			sourceTree = "<group>";
+		};
+		BAAA12A9183E0FB10021C60D /* messageBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				BA776621183CBE7B00F48419 /* IMAuthMessageBuilder.h */,
+				BA776622183CBE7B00F48419 /* IMAuthMessageBuilder.m */,
+				BA7765B9183C0ED000F48419 /* IMSessionInitMessageBuilder.h */,
+				BA7765BA183C0ED000F48419 /* IMSessionInitMessageBuilder.m */,
+				BAAA12AB183E10050021C60D /* IMSessionPeriodRequestMessageBuilder.h */,
+				BAAA12AC183E10050021C60D /* IMSessionPeriodRequestMessageBuilder.m */,
+				BAAA12AF183E7A770021C60D /* IMSessionPeriodResponseMessageBuilder.h */,
+				BAAA12B0183E7A770021C60D /* IMSessionPeriodResponseMessageBuilder.m */,
+			);
+			name = messageBuilder;
+			sourceTree = "<group>";
+		};
+		BAAA12AA183E0FC20021C60D /* messageParser */ = {
+			isa = PBXGroup;
+			children = (
+				BA7765BD183C132800F48419 /* IMMessageParserImp.h */,
+				BA7765BE183C132800F48419 /* IMMessageParserImp.m */,
+			);
+			name = messageParser;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -629,6 +681,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA77661F183C9F8A00F48419 /* NSData+Byte.m in Sources */,
+				BAAA12AD183E10050021C60D /* IMSessionPeriodRequestMessageBuilder.m in Sources */,
 				BA7765C3183C170500F48419 /* IMDataPool.m in Sources */,
 				BA7765B7183C0B1400F48419 /* IMTCPCommunicator.m in Sources */,
 				BA77661A183C92C000F48419 /* NSString+MD5.m in Sources */,
@@ -637,6 +690,7 @@
 				BA776627183CC11E00F48419 /* IMSeqenceGen.m in Sources */,
 				BA26C7A71829DD2700C5CD39 /* IMRootViewController.m in Sources */,
 				BA26C79E1829DD2700C5CD39 /* IMAppDelegate.m in Sources */,
+				BAAA12B1183E7A770021C60D /* IMSessionPeriodResponseMessageBuilder.m in Sources */,
 				BA7765BF183C132800F48419 /* IMMessageParserImp.m in Sources */,
 				BA776623183CBE7B00F48419 /* IMAuthMessageBuilder.m in Sources */,
 				BA26C79A1829DD2700C5CD39 /* main.m in Sources */,
@@ -649,6 +703,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA7765B8183C0B1400F48419 /* IMTCPCommunicator.m in Sources */,
+				BAAA12B2183E7A770021C60D /* IMSessionPeriodResponseMessageBuilder.m in Sources */,
 				BA7765C4183C170500F48419 /* IMDataPool.m in Sources */,
 				BA776628183CC11E00F48419 /* IMSeqenceGen.m in Sources */,
 				BA77661B183C92C000F48419 /* NSString+MD5.m in Sources */,
@@ -659,6 +714,7 @@
 				BA795AEB183BF93E00466D8E /* IMManagerImp.m in Sources */,
 				BA776620183C9F8A00F48419 /* NSData+Byte.m in Sources */,
 				BA26C7BC1829DD2800C5CD39 /* imTests.m in Sources */,
+				BAAA12AE183E10050021C60D /* IMSessionPeriodRequestMessageBuilder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1026,6 +1082,7 @@
 				BA776601183C7CE700F48419 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BA776602183C7CE700F48419 /* Build configuration list for PBXNativeTarget "GCDSocketTests" */ = {
 			isa = XCConfigurationList;
@@ -1034,6 +1091,7 @@
 				BA776604183C7CE700F48419 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
