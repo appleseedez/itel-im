@@ -53,4 +53,7 @@
 - (IBAction)dial:(UIButton *)sender {
     [self.manager dial:self.itelNumberField.text];
 }
+
+- (IBAction)answerDial:(UIButton *)sender {
+}
 @end

@@ -12,7 +12,7 @@
 //拨号
 - (void) dial:(NSString*) account;
 // 开始通话过程
-- (void) startSession;
+- (void) startSession:(NSString*) destAccount;
 // 结束通话过程
 - (void) endSession;
 // 初始化&启动

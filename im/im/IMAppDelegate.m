@@ -12,7 +12,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+//    NSDictionary* testData = @{@"head":@"this is head",@"body":@{@"type":@"this is body type",@"data":@"this is data"}};
+//    NSData* tempData  = [NSJSONSerialization dataWithJSONObject:testData options:0 error:nil];
+//    NSDictionary* resultData = [NSJSONSerialization JSONObjectWithData:tempData options:NSJSONReadingMutableContainers error:nil];
+//    
+//    NSLog(@"%@",resultData);
     return YES;
 }
 							

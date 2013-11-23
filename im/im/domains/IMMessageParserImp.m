@@ -10,6 +10,7 @@
 
 @implementation IMMessageParserImp
 - (NSDictionary *)parse:(NSDictionary *)data{
+
     return data;
 }
 @end

@@ -11,6 +11,7 @@
 @interface IMHomeViewController : UIViewController
 - (IBAction)popDialPanel:(UIBarButtonItem *)sender;
 - (IBAction)dial:(UIButton *)sender;
+- (IBAction)answerDial:(UIButton *)sender;
 @property (weak, nonatomic) IBOutlet UITextField *itelNumberField;
 
 @end

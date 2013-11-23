@@ -81,11 +81,11 @@ UIImageView* _pview_local;
     return nat.GetNatType("stunserver.org");
 }
 
-- (NSDictionary*)endPointAddress{
+- (NSDictionary*)endPointAddressWithProbeServer:(NSString*) probeServerIP port:(NSInteger) probeServerPort{
     char self_inter_ip[16];
     uint16_t self_inter_port;
     //获取本机外网ip和端口
-    self.pInterfaceApi->GetSelfInterAddr(PROBE_SERVER, PROBE_PORT, self_inter_ip, self_inter_port);
+    self.pInterfaceApi->GetSelfInterAddr([probeServerIP UTF8String], probeServerPort, self_inter_ip, self_inter_port);
     return @{
             SESSION_PERIOD_FIELD_PEER_INTER_IP_KEY: [NSString stringWithUTF8String:self_inter_ip],
              SESSION_PERIOD_FIELD_PEER_INTER_PORT_KEY:[NSNumber numberWithInt:self_inter_port],

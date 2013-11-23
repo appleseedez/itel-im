@@ -16,7 +16,7 @@
 //获取natType
 - (NatType) natType;
 //获取本机端点地址
-- (NSDictionary*) endPointAddress;
+- (NSDictionary*)endPointAddressWithProbeServer:(NSString*) probeServerIP port:(NSInteger) probeServerPort;
 //获取p2p通道
 - (int) tunnelWith:(NSDictionary*) params;
 //开始传输
