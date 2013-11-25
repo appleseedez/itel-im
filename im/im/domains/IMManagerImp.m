@@ -67,8 +67,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionInited:) name:SESSION_INITED_NOTIFICATION object:nil];
     //通话请求期间的数据通信，都发这个通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionPeriod:) name:SESSION_PERIOD_NOTIFICATION object:nil];
-    //通话被拒绝，发这个通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionRefuse:) name:SESSION_PERIOD_REFUSE_NOTIFICATION object:nil];
+    //通话终止，发这个通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionHalt:) name:SESSION_PERIOD_HALT_NOTIFICATION object:nil];
     //登录到信令服务器后，需要做一次验证，验证信息响应时，发出该通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authHasResult:) name:CMID_APP_LOGIN_SSS_NOTIFICATION object:nil];
 }
@@ -121,7 +121,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:CMID_APP_LOGIN_SSS_NOTIFICATION object:nil userInfo:bodySection];
             break;
         case SESSION_PERIOD_HALT_TYPE:
-            [[NSNotificationCenter defaultCenter] postNotificationName:SESSION_PERIOD_REFUSE_NOTIFICATION object:nil userInfo:bodySection];
+            [[NSNotificationCenter defaultCenter] postNotificationName:SESSION_PERIOD_HALT_NOTIFICATION object:nil userInfo:bodySection];
             break;
         default:
             break;
@@ -170,22 +170,41 @@
     [self.communicator send:data];
 }
 /**
- *  通话拒绝
+ *  收到终止信令的回复
  *
+ *  @param notify 拒绝数据
  */
-- (void) sessionRefuse:(NSNotification*) notify{
-    NSLog(@"发送拒绝");
-    [self.engine stopTransport];
-    [self endSession];
-    NSDictionary* parsedData = notify.userInfo;
-    self.messageBuilder = [[IMSessionRefuseMessageBuilder alloc] init];
+- (void) sessionHalt:(NSNotification*) notify{
+    NSLog(@"收到拒绝信令回复");
+    NSString* haltType = [notify.userInfo valueForKey:SESSION_HALT_FIELD_TYPE_KEY];
+    if ([SESSION_HALT_FILED_ACTION_BUSY isEqualToString:haltType]) {
+        [self endSession];
+    }else if ([SESSION_HALT_FILED_ACTION_REFUSE isEqualToString:haltType]){
+        [self endSession];
+    }else if ([SESSION_HALT_FILED_ACTION_END isEqualToString:haltType]){
+        [self endSession];
+        [self.engine stopTransport];
+    }else{
+        //
+    }
+}
+
+/**
+ *  通话拒绝
+ *  只是做信令数据的构造和发送
+ */
+
+-(void) sessionHaltRequest:(NSDictionary*) refuseData{
+    NSLog(@"发送拒绝信令");
+    // 处理参数
     NSDictionary* params = @{
-                           DATA_TYPE_KEY:[NSNumber numberWithInteger:SESSION_PERIOD_HALT_TYPE],
-                           SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY: self.selfAccount,
-                           SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[parsedData valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY],
-                           SESSION_PERIOD_FIELD_ACTION_KEY:[parsedData valueForKey:SESSION_PERIOD_FIELD_ACTION_KEY]
-                           };
-    NSDictionary* data = [self.messageBuilder buildWithParams:params];
+                             DATA_TYPE_KEY:[NSNumber numberWithInteger:SESSION_PERIOD_HALT_TYPE],
+                             SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[refuseData valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY],
+                             SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:[refuseData valueForKey:SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY],
+                             SESSION_HALT_FIELD_TYPE_KEY:[refuseData valueForKey:SESSION_HALT_FIELD_TYPE_KEY]
+                             };
+    self.messageBuilder = [[IMSessionRefuseMessageBuilder alloc] init];
+    NSDictionary* data =  [self.messageBuilder buildWithParams:params];
     [self.communicator send:data];
 }
 
@@ -223,8 +242,15 @@
         NSLog(@"收到通话请求，用户操作可以接听");
         //通知界面，弹出通话接听界面:[self sessionPeriodResponse:notify]
         [[NSNotificationCenter defaultCenter] postNotificationName:SESSION_PERIOD_REQ_NOTIFICATION object:nil userInfo:notify.userInfo];
-    }else{//剩余的情况表明。当前正在通话中，应该拒绝 这里会是自动拒绝
+    }else{//剩余的情况表明。当前正在通话中，应该拒绝 这里会是自动拒绝 
         // Todo 构造拒绝信令
+        NSDictionary* busyData = @{
+                                     DATA_TYPE_KEY:[NSNumber numberWithInteger:SESSION_PERIOD_HALT_TYPE],
+                                     SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:currentDest,
+                                     SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:self.state,
+                                     SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_BUSY
+                                     };
+        [self sessionHaltRequest:busyData];
     }
 }
 //如果是处理的peer端的响应类型。那么，有可能是接受通话，则接下来开始进行p2p通道获取; 也有可能是拒绝通话，则通话请求终止
@@ -244,7 +270,6 @@
 - (void) authHasResult:(NSNotification*) notify{
     NSLog(@"收到信令服务器端帐号验证响应~");
 }
-
 
 #pragma mark - INTERFACE
 
@@ -275,7 +300,7 @@
 - (void) acceptSession:(NSNotification*) notify{
     [self sessionPeriodResponse:notify];
 }
-- (void)refuseSession:(NSNotification*) notify{
-    [self sessionRefuse:notify];
+- (void)haltSession:(NSDictionary*) data{
+    [self sessionHaltRequest:data];
 }
 @end

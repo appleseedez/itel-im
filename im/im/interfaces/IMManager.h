@@ -21,6 +21,6 @@
 - (void) tearDown;
 //接受通话请求
 - (void) acceptSession:(NSNotification*) notify;
-// 拒绝通话请求
-- (void) refuseSession:(NSNotification*) notify;
+// 终止通话请求
+- (void)haltSession:(NSDictionary*) data;
 @end

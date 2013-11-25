@@ -177,7 +177,7 @@ UIImageView* _pview_local;
     }
     if (!ret)
     {
-        NSLog(@"初期化失败");
+        NSLog(@"传输初期化失败");
     }
     
     
@@ -191,7 +191,6 @@ UIImageView* _pview_local;
 }
 
 - (void)stopTransport{
-    
     self.pInterfaceApi->StopMedia(self.m_type);
 }
 - (void)openScreen{
