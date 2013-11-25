@@ -15,6 +15,7 @@ UIImageView* _pview_local;
 @interface IMEngineImp ()
 @property(nonatomic) CAVInterfaceAPI* pInterfaceApi;
 @property(nonatomic) InitType m_type;
+@property(nonatomic,copy) NSString* currentInterIP;
 @end
 
 @implementation IMEngineImp
@@ -60,9 +61,33 @@ UIImageView* _pview_local;
     }
     NSString *addr = wifiAddress ? wifiAddress : cellAddress;
     
-    NSLog(@"本机ip地址: %@",addr);
+    NSLog(@">>>>>>>>>本机ip地址: %@",addr);
     return addr;
 }
+
+-(NSInteger) getCameraOrientation:(NSInteger) cameraOrientation
+{
+    UIInterfaceOrientation displatyRotation = [[UIApplication sharedApplication] statusBarOrientation];
+    NSInteger degrees = 0;
+    switch (displatyRotation) {
+        case UIInterfaceOrientationPortrait: degrees = 0; break;
+        case UIInterfaceOrientationLandscapeLeft: degrees = 90; break;
+        case UIInterfaceOrientationPortraitUpsideDown: degrees = 180; break;
+        case UIInterfaceOrientationLandscapeRight: degrees = 270; break;
+    }
+    
+    NSInteger result = 0;
+    if (cameraOrientation > 180) {
+        result = (cameraOrientation + degrees) % 360;
+    } else {
+        result = (cameraOrientation - degrees + 360) % 360;
+    }
+    
+    return result;
+}
+
+
+#pragma mark - INTERFACE
 
 // IMEngine接口 见接口定义
 - (void)initNetwork{
@@ -82,15 +107,17 @@ UIImageView* _pview_local;
 }
 
 - (NSDictionary*)endPointAddressWithProbeServer:(NSString*) probeServerIP port:(NSInteger) probeServerPort{
+    NSLog(@"外网地址探测服务器地址：%@",probeServerIP);
     char self_inter_ip[16];
     uint16_t self_inter_port;
     //获取本机外网ip和端口
     self.pInterfaceApi->GetSelfInterAddr([probeServerIP UTF8String], probeServerPort, self_inter_ip, self_inter_port);
+    self.currentInterIP =[NSString stringWithUTF8String:self_inter_ip];
     return @{
             SESSION_PERIOD_FIELD_PEER_INTER_IP_KEY: [NSString stringWithUTF8String:self_inter_ip],
              SESSION_PERIOD_FIELD_PEER_INTER_PORT_KEY:[NSNumber numberWithInt:self_inter_port],
              SESSION_PERIOD_FIELD_PEER_LOCAL_IP_KEY:[[self class] localAddress],
-             SESSION_PERIOD_FIELD_PEER_LOCAL_PORT_KEY:[NSNumber numberWithInt:22222]
+             SESSION_PERIOD_FIELD_PEER_LOCAL_PORT_KEY:[NSNumber numberWithInt:LOCAL_PORT]
              };
 }
 
@@ -109,23 +136,75 @@ UIImageView* _pview_local;
     argc.otherForwardPort = [[params valueForKey:SESSION_INIT_RES_FIELD_FORWARD_PORT_KEY] intValue];
     
     // 对方的ssid
-    argc.otherSsid = [[params valueForKey:SESSION_INIT_RES_FIELD_SSID_KEY] intValue]+1;
+    argc.otherSsid = [[params valueForKey:SESSION_DEST_SSID_KEY] intValue];
     // 自己的ssid
-    argc.selfSsid = [[params valueForKey:SESSION_INIT_RES_FIELD_SSID_KEY] intValue];
+    argc.selfSsid = [[params valueForKey:SESSION_SRC_SSID_KEY] intValue];
+    
+    //如果内网的ip相同.设置argc.localable = true;
+    
+    NSLog(@"本机的外网ip：%@",self.currentInterIP);
+    NSLog(@"对方的外网ip：%@",[NSString stringWithUTF8String:argc.otherInterIP]);
+    if ([self.currentInterIP isEqualToString:[NSString stringWithUTF8String:argc.otherInterIP]]) {
+        argc.localEnble = true;
+    }else{
+        argc.localEnble = false;
+    }
+    NSLog(@"设置localable为：%d",argc.localEnble);
+    NSLog(@"通话参数：对方外网ip：%s",argc.otherInterIP);
+    NSLog(@"通话参数：对方外网port：%i",argc.otherInterPort);
+    NSLog(@"通话参数：对方内网ip：%s",argc.otherLocalIP);
+    NSLog(@"通话参数：对方内网port:%i",argc.otherLocalPort);
+    NSLog(@"通话参数：对方ssid：%i",argc.otherSsid);
+    NSLog(@"通话参数：自己ssid：%i",argc.selfSsid);
+    self.pInterfaceApi->GetP2PPeer(argc);
+    
+    bool ret;
+    NSLog(@"isLocal的状态：%d",argc.islocal);
+    if (argc.islocal)
+    {
+        NSLog(@"内网可用[%s:%d]", argc.otherLocalIP, argc.otherLocalPort);
+        ret = self.pInterfaceApi->StartMedia(self.m_type, argc.otherLocalIP, argc.otherLocalPort);// 要判断返回值
+    }
+    else if (argc.isInter)
+    {
+        NSLog(@"外网可用[%s:%d]", argc.otherInterIP, argc.otherInterPort);
+        ret = self.pInterfaceApi->StartMedia(self.m_type, argc.otherInterIP, argc.otherInterPort);// 要判断返回值
+    }
+    else
+    {
+        NSLog(@"转发可用[%s:%d]", argc.otherForwardIP, argc.otherForwardPort);
+        ret = self.pInterfaceApi->StartMedia(InitTypeVoe, argc.otherForwardIP, argc.otherForwardPort);// 要判断返回值
+    }
+    if (!ret)
+    {
+        NSLog(@"初期化失败");
+    }
     
     
-    return 0;
+    
+    return ret;
 }
 - (BOOL)startTransport{
+    
+    
     return NO;
 }
 
 - (void)stopTransport{
     
+    self.pInterfaceApi->StopMedia(self.m_type);
 }
 - (void)openScreen{
+    // 开启摄像头
+    if (self.pInterfaceApi->StartCamera(1) >= 0)
+    {
+        // 摆正摄像头位置
+        self.pInterfaceApi->VieSetRotation([self getCameraOrientation:self.pInterfaceApi->VieGetCameraOrientation(0)]);
+    }
 }
 - (void)closeScreen{
     
 }
+
+
 @end

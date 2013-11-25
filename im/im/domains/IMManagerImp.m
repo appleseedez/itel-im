@@ -11,8 +11,8 @@
 @interface IMManagerImp ()
 
 //状态标识符，表明当前所处的状态。目前只有占用和空闲两种 占用：IN_USE，空闲：IDLE
-@property (nonatomic) NSString* state;
-
+@property (nonatomic,copy) NSString* state;
+@property (nonatomic,copy) NSString* selfAccount;
 @end
 
 @implementation IMManagerImp
@@ -27,7 +27,9 @@
     [self.communicator connect];
     [self.communicator keepAlive];
     //向信令服务器发验证请求
-    [self auth:@"1" cert:@"chengjianjun"];
+    self.selfAccount = @"1";
+    [self auth:self.selfAccount cert:@"chengjianjun"];
+    [self endSession];
 }
 
 
@@ -65,10 +67,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionInited:) name:SESSION_INITED_NOTIFICATION object:nil];
     //通话请求期间的数据通信，都发这个通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionPeriod:) name:SESSION_PERIOD_NOTIFICATION object:nil];
-    //    //对收到的信令响应数据进行解析后，如果是请求类型，则发出该通知
-    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionPeriodRequest:) name:SESSION_PERIOD_REQ_NOTIFICATION object:nil];
-    //    //收到信令响应数据进行解析后，如果是响应类型，则发出该通知
-    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionPeriodResponse:) name:SESSION_PERIOD_RES_NOTIFICATION object:nil];
+    //通话被拒绝，发这个通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionRefuse:) name:SESSION_PERIOD_REFUSE_NOTIFICATION object:nil];
     //登录到信令服务器后，需要做一次验证，验证信息响应时，发出该通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authHasResult:) name:CMID_APP_LOGIN_SSS_NOTIFICATION object:nil];
 }
@@ -103,7 +103,7 @@
         }
         bodySection = [data valueForKey:BODY_SECTION_KEY];
     }else{
-        type = SESSION_PERIOD_PROCEED_TYPE;
+        type = [[data valueForKey:DATA_TYPE_KEY] integerValue];
         bodySection = data;
     }
     
@@ -120,36 +120,72 @@
         case CMID_APP_LOGIN_SSS_RESP_TYPE: //信令服务器验证响应返回了，通知业务层
             [[NSNotificationCenter defaultCenter] postNotificationName:CMID_APP_LOGIN_SSS_NOTIFICATION object:nil userInfo:bodySection];
             break;
+        case SESSION_PERIOD_HALT_TYPE:
+            [[NSNotificationCenter defaultCenter] postNotificationName:SESSION_PERIOD_REFUSE_NOTIFICATION object:nil userInfo:bodySection];
+            break;
         default:
             break;
     }
     
 }
-
-//封装了构造和发送通话请求和回复的过程。 用过使用不同的信令构造器，就可以做到用一套逻辑处理请求和回复两种
+/**
+ *  通话建立过程中的协议交换
+ *
+ *  封装了构造和发送通话请求和回复的过程。
+ *  用过使用不同的信令构造器，就可以做到用一套逻辑处理请求和回复两种
+ *
+ *  @param void negotiationData 协议数据
+ *
+ *  @return void
+ */
 - (void) sessionPeriodNegotiation:(NSDictionary*) negotiationData{
     NSDictionary* parsedData =  [self.messageParser parse:negotiationData];
+    NSLog(@"获取到的谈判数据：%@",parsedData);
     NSString* forwardIP = [parsedData valueForKey:SESSION_INIT_RES_FIELD_FORWARD_IP_KEY];
     NSInteger forwardPort = [[parsedData valueForKey:SESSION_INIT_RES_FIELD_FORWARD_PORT_KEY] integerValue];
     // 获取本机natType
     NatType natType = [self.engine natType];
-    // 获取本机的链路列表
+    // 获取本机的链路列表. 中继服务器目前充当外网地址探测
     NSDictionary* communicationAddress = [self.engine endPointAddressWithProbeServer:forwardIP port:forwardPort];
     
     //此处我需要做的是字典的数据融合！！！
     NSMutableDictionary* mergeData = [communicationAddress mutableCopy];
     //将信令服务器返回的通话查询请求的响应中的转发地址和目的号码取出来，合并进新的通话请求信令中
     [mergeData addEntriesFromDictionary:@{
+                                          DATA_TYPE_KEY:[NSNumber numberWithInteger:SESSION_PERIOD_PROCEED_TYPE],
                                           SESSION_INIT_RES_FIELD_FORWARD_IP_KEY:
                                               [parsedData valueForKey:SESSION_INIT_RES_FIELD_FORWARD_IP_KEY],
                                           SESSION_INIT_RES_FIELD_FORWARD_PORT_KEY:
                                               [parsedData valueForKey:SESSION_INIT_RES_FIELD_FORWARD_PORT_KEY],
-                                          SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:
-                                              [parsedData valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY]}];
+                                          SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY: self.selfAccount,
+                                          SESSION_SRC_SSID_KEY:[parsedData valueForKey:SESSION_DEST_SSID_KEY], //总是在传递是以接收方的角度去思考
+                                          SESSION_DEST_SSID_KEY:[parsedData valueForKey:SESSION_SRC_SSID_KEY]
+                                          }];
+    //由于信令是发给对方的。所以destAccount和srcaccount应该是从对方的角度去思考。因此destAccount填的是自己的帐号，srcaccount填写的是对方的帐号。这样，在对方看来就是完美的。而且，对等方在构造信令数据时有相同的逻辑
+    [mergeData addEntriesFromDictionary:@{SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[parsedData valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY]}];
     // 通话请求信令中，需要本机的NAT类型。
     [mergeData addEntriesFromDictionary:@{SESSION_PERIOD_FIELD_PEER_NAT_TYPE_KEY: [NSNumber numberWithInt:natType]}];
     // 构造通话数据请求
     NSDictionary* data = [self.messageBuilder buildWithParams:mergeData];
+    [self.communicator send:data];
+}
+/**
+ *  通话拒绝
+ *
+ */
+- (void) sessionRefuse:(NSNotification*) notify{
+    NSLog(@"发送拒绝");
+    [self.engine stopTransport];
+    [self endSession];
+    NSDictionary* parsedData = notify.userInfo;
+    self.messageBuilder = [[IMSessionRefuseMessageBuilder alloc] init];
+    NSDictionary* params = @{
+                           DATA_TYPE_KEY:[NSNumber numberWithInteger:SESSION_PERIOD_HALT_TYPE],
+                           SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY: self.selfAccount,
+                           SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[parsedData valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY],
+                           SESSION_PERIOD_FIELD_ACTION_KEY:[parsedData valueForKey:SESSION_PERIOD_FIELD_ACTION_KEY]
+                           };
+    NSDictionary* data = [self.messageBuilder buildWithParams:params];
     [self.communicator send:data];
 }
 
@@ -164,9 +200,12 @@
 //收到信令服务器的通话查询响应，进行后续业务
 - (void) sessionInited:(NSNotification*) notify{
     NSLog(@"收到通话查询响应~");
-    
+    NSMutableDictionary *data = [notify.userInfo mutableCopy];
+    [data addEntriesFromDictionary:@{
+                                    SESSION_SRC_SSID_KEY:[notify.userInfo valueForKey:SESSION_INIT_RES_FIELD_SSID_KEY],
+                                    SESSION_DEST_SSID_KEY:[NSNumber numberWithInteger:[[notify.userInfo valueForKey:SESSION_INIT_RES_FIELD_SSID_KEY] integerValue]+1]}];
     self.messageBuilder = [[IMSessionPeriodRequestMessageBuilder alloc] init];
-    [self sessionPeriodNegotiation:notify.userInfo];
+    [self sessionPeriodNegotiation:data];
     // TODO 设置10秒超时，如果没有收到接受通话的回复则转到拒绝流程
     
 }
@@ -174,15 +213,17 @@
 //收到peer端的请求类型，则首先检查自己是否是被占用状态。
 //在非占用状态下，10秒内用户主动操作接听，则开始构造响应类型数据，同时本机设置为占用状态，然后开始获取p2p的后续操作
 - (void) sessionPeriod:(NSNotification*) notify{
-    NSLog(@"收到通话请求，根据数据具体情况，是接受还是拒绝~");
     NSString* currentDest = [notify.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY];
     if ([self.state isEqualToString:currentDest]) { //如果收到的通话信令就是自己正在拨打的。则表明自己是拨打方，可以开始p2p流程了
         //开始获取p2p通道
+        NSLog(@"收到响应，开始通话");
         [self.engine tunnelWith:notify.userInfo];
         [self.engine startTransport];
     }else if ([self.state isEqualToString:IDLE]){ //如果是idle状态下，接到了通话信令，则是有人拨打
+        NSLog(@"收到通话请求，用户操作可以接听");
+        //通知界面，弹出通话接听界面:[self sessionPeriodResponse:notify]
         [[NSNotificationCenter defaultCenter] postNotificationName:SESSION_PERIOD_REQ_NOTIFICATION object:nil userInfo:notify.userInfo];
-    }else{//剩余的情况表明。当前正在通话中，应该拒绝
+    }else{//剩余的情况表明。当前正在通话中，应该拒绝 这里会是自动拒绝
         // Todo 构造拒绝信令
     }
 }
@@ -234,5 +275,7 @@
 - (void) acceptSession:(NSNotification*) notify{
     [self sessionPeriodResponse:notify];
 }
-
+- (void)refuseSession:(NSNotification*) notify{
+    [self sessionRefuse:notify];
+}
 @end

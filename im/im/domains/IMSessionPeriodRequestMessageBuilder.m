@@ -20,8 +20,9 @@
                                      DATA_SEQ_KEY:[NSNumber numberWithInteger:[IMSeqenceGen seq]]
                                      },
                              BODY_SECTION_KEY:@{
-                                     SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:[params valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY],
-                                     DATA_CONTENT_KEY: [NSJSONSerialization dataWithJSONObject:params options:0 error:&error]
+                                     SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:[params valueForKey:SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY],
+                                     DATA_CONTENT_KEY:[[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:params options:0 error:&error]  encoding:NSUTF8StringEncoding]
+                                     
                                      }
                              
                              };

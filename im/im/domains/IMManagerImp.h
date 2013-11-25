@@ -17,6 +17,7 @@
 #import "IMAuthMessageBuilder.h"
 #import "IMSessionPeriodRequestMessageBuilder.h"
 #import "IMSessionPeriodResponseMessageBuilder.h"
+#import "IMSessionRefuseMessageBuilder.h"
 #import "IMMessageParser.h"
 #import "IMMessageParserImp.h"
 #import "IMDataPool.h"

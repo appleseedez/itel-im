@@ -68,6 +68,7 @@ typedef struct stP2PPeerArgc
     unsigned short otherLocalPort;// 对方的内网端口
     char otherForwardIP[16];// 转发地址
     unsigned short otherForwardPort;// 转发端口
+    bool localEnble;
     
     // 出参
     bool islocal;// 内网可用
@@ -95,6 +96,7 @@ typedef struct stP2PPeerArgc
         islocal = false;
         isInter = false;
         isforward = false;
+        localEnble = false;
     }
 }TP2PPeerArgc;
 

@@ -17,7 +17,10 @@
 - (void) endSession;
 // 初始化&启动
 - (void) setup;
-
+//销毁
 - (void) tearDown;
-
+//接受通话请求
+- (void) acceptSession:(NSNotification*) notify;
+// 拒绝通话请求
+- (void) refuseSession:(NSNotification*) notify;
 @end
