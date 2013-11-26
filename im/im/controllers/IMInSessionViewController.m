@@ -26,7 +26,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     //开启视频窗口，调整摄像头
+    [self.remoteRenderView setupWidth:self.view.bounds.size.width AndHeight:self.view.bounds.size.height];
+    [self.manager openScreen:self.remoteRenderView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,7 +47,14 @@
 }
 
 - (IBAction)endSession:(UIButton *)sender {
-    [self.manager haltSession:nil];
+    NSMutableDictionary* endSessionDataMut = [self.inSessionNotify.userInfo mutableCopy];
+    [endSessionDataMut addEntriesFromDictionary:@{
+                                                  SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_END
+                                                  
+                                                  }];
+    
+    NSLog(@"通话中界面的业务数据：%@",endSessionDataMut);
+    [self.manager haltSession:endSessionDataMut];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 @end

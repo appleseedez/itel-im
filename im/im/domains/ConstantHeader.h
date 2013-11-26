@@ -96,6 +96,6 @@
 
 #define CALLING_VIEW_CONTROLLER_ID @"CallingView"
 #define ANSWERING_VIEW_CONTROLLER_ID @"AnsweringView"
-#define INSESSION_VIEW_CONTROLLER_ID @"InSessionView"
+#define INSESSION_VIEW_CONTROLLER_ID @"InSessionWithVoiceView"
 
 #endif

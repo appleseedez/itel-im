@@ -296,7 +296,7 @@
     [self.communicator connect];
     [self.communicator keepAlive];
     //向信令服务器发验证请求
-    self.selfAccount = @"2000";
+    self.selfAccount = @"1000";
     [self auth:self.selfAccount cert:@"chengjianjun"];
     
 }
@@ -332,6 +332,12 @@
     [self sessionHaltRequest:data];
 }
 
+- (void)openScreen:(RenderView *)remoteRenderView{
+    [self.engine openScreen:remoteRenderView];
+}
+- (void)closeScreen{
+    
+}
 - (NSString *)selfAccount{
     return _selfAccount;
 }

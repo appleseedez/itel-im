@@ -10,6 +10,7 @@
 #import "AVInterface.h"
 #import "NatTypeImpl.h"
 #import "ConstantHeader.h"
+#import "render_view.h"
 UIImageView* _pview_local;
 
 @interface IMEngineImp ()
@@ -97,7 +98,7 @@ UIImageView* _pview_local;
 }
 
 - (void)initMedia{
-    self.m_type = self.pInterfaceApi->MediaInit(SCREEN_WIDTH,SCREEN_HEIGHT,InitTypeNone);
+    self.m_type = self.pInterfaceApi->MediaInit(SCREEN_WIDTH,SCREEN_HEIGHT,InitTypeVoeAndVie);
     NSLog(@"媒体类型：%d",self.m_type);
 }
 
@@ -193,14 +194,14 @@ UIImageView* _pview_local;
 - (void)stopTransport{
     self.pInterfaceApi->StopMedia(self.m_type);
 }
-- (void)openScreen{
+- (void)openScreen:(RenderView*) remoteRenderView{
     // 开启摄像头
     if (self.pInterfaceApi->StartCamera(1) >= 0)
     {
         // 摆正摄像头位置
         self.pInterfaceApi->VieSetRotation([self getCameraOrientation:self.pInterfaceApi->VieGetCameraOrientation(0)]);
     }
-    
+    self.pInterfaceApi->VieAddRemoteRenderer((__bridge void*)remoteRenderView);
 }
 - (void)closeScreen{
     

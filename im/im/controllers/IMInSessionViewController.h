@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "IMManager.h"
+#import "render_view.h"
 @interface IMInSessionViewController : UIViewController
 @property(nonatomic,weak) id<IMManager> manager;
 - (IBAction)endSession:(UIButton *)sender;
+@property (weak, nonatomic) IBOutlet RenderView *remoteRenderView;
 @property(nonatomic,strong) NSNotification* inSessionNotify;
 @end
