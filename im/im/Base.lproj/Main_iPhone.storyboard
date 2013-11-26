@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="UX2-ao-z6F">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="UX2-ao-z6F">
     <dependencies>
         <deployment defaultVersion="1552" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
@@ -9,15 +9,11 @@
         <scene sceneID="p1v-Ss-2Dd">
             <objects>
                 <viewController id="JaO-ba-hBD" customClass="IMHomeViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="vEB-hj-sUH"/>
-                        <viewControllerLayoutGuide type="bottom" id="1sb-ti-K66"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="5uc-Vj-znf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DjE-nf-NnQ">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="DjE-nf-NnQ">
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
@@ -29,13 +25,13 @@
                                     <barButtonItem title="联系人" id="Ko9-5o-INr"/>
                                 </items>
                             </toolbar>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mTD-kA-MNK">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="mTD-kA-MNK">
                                 <rect key="frame" x="42" y="69" width="236" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aLb-oD-Xmq">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="aLb-oD-Xmq">
                                 <rect key="frame" x="42" y="107" width="236" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="拨号">
@@ -45,7 +41,7 @@
                                     <action selector="dial:" destination="JaO-ba-hBD" eventType="touchUpInside" id="NCG-BA-Wph"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L8l-7v-0kl">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="L8l-7v-0kl">
                                 <rect key="frame" x="42" y="165" width="236" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="接听">
@@ -66,24 +62,280 @@
             </objects>
             <point key="canvasLocation" x="1326" y="0.0"/>
         </scene>
-        <!--View Controller-->
+        <!--Dail View Controller-->
         <scene sceneID="GnS-KE-j59">
             <objects>
-                <viewController id="YqE-kK-xz0" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="9hO-pI-06D"/>
-                        <viewControllerLayoutGuide type="bottom" id="AEA-mQ-4FM"/>
-                    </layoutGuides>
+                <viewController id="YqE-kK-xz0" customClass="IMDailViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jdd-k4-mFl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="TAj-MX-jvg">
+                                <rect key="frame" x="14" y="198" width="90" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="12" maxY="0.0"/>
+                                <state key="normal" title="1">
+                                    <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="dialNumber:" destination="YqE-kK-xz0" eventType="touchUpInside" id="RGB-oQ-gDe"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jhb-jj-NgX">
+                                <rect key="frame" x="115" y="198" width="90" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="12" maxY="0.0"/>
+                                <state key="normal" title="2">
+                                    <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="dialNumber:" destination="YqE-kK-xz0" eventType="touchUpInside" id="DAE-yB-njG"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="oo2-8K-duq">
+                                <rect key="frame" x="216" y="198" width="90" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="12" maxY="0.0"/>
+                                <state key="normal" title="3">
+                                    <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="dialNumber:" destination="YqE-kK-xz0" eventType="touchUpInside" id="HnV-me-hmC"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ABC" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0fr-bv-DKH">
+                                <rect key="frame" x="163" y="229" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DEF" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5pt-Is-UTW">
+                                <rect key="frame" x="264" y="229" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="OxJ-HR-jAC">
+                                <rect key="frame" x="14" y="261" width="90" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="12" maxY="0.0"/>
+                                <state key="normal" title="4">
+                                    <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="dialNumber:" destination="YqE-kK-xz0" eventType="touchUpInside" id="aSS-a7-5eY"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tPx-2V-0xc">
+                                <rect key="frame" x="115" y="261" width="90" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="12" maxY="0.0"/>
+                                <state key="normal" title="5">
+                                    <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="dialNumber:" destination="YqE-kK-xz0" eventType="touchUpInside" id="R5Q-nA-Fdf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="b7p-qk-yDL">
+                                <rect key="frame" x="216" y="261" width="90" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="12" maxY="0.0"/>
+                                <state key="normal" title="6">
+                                    <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="dialNumber:" destination="YqE-kK-xz0" eventType="touchUpInside" id="xLo-ZX-Vru"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="JKL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="n9C-FR-rA0">
+                                <rect key="frame" x="163" y="292" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MNO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yVj-nV-Dlh">
+                                <rect key="frame" x="264" y="292" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GHI" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VSE-zC-vqr">
+                                <rect key="frame" x="62" y="292" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="tdE-Dx-XWQ">
+                                <rect key="frame" x="14" y="323" width="90" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="12" maxY="0.0"/>
+                                <state key="normal" title="7">
+                                    <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="dialNumber:" destination="YqE-kK-xz0" eventType="touchUpInside" id="ean-BL-WqW"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0yM-Bw-ZXD">
+                                <rect key="frame" x="115" y="323" width="90" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="12" maxY="0.0"/>
+                                <state key="normal" title="8">
+                                    <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="dialNumber:" destination="YqE-kK-xz0" eventType="touchUpInside" id="3Pv-o8-8Im"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="0j5-ec-Qjx">
+                                <rect key="frame" x="216" y="323" width="90" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="12" maxY="0.0"/>
+                                <state key="normal" title="9">
+                                    <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="dialNumber:" destination="YqE-kK-xz0" eventType="touchUpInside" id="tcJ-Is-CHb"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TUV" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rfj-to-vSv">
+                                <rect key="frame" x="163" y="354" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WXYZ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mBX-hN-Hpb">
+                                <rect key="frame" x="264" y="354" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PQRS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Gpz-C6-8h0">
+                                <rect key="frame" x="62" y="354" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="CQX-Xm-AcU">
+                                <rect key="frame" x="14" y="386" width="90" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="26"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="12" maxY="0.0"/>
+                                <state key="normal" title="＊">
+                                    <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="dialNumber:" destination="YqE-kK-xz0" eventType="touchUpInside" id="QCH-Rg-de7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="U1A-8t-r46">
+                                <rect key="frame" x="115" y="386" width="90" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="12" maxY="0.0"/>
+                                <state key="normal" title="0">
+                                    <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="dialNumber:" destination="YqE-kK-xz0" eventType="touchUpInside" id="amI-j5-Anq"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="E7Y-9r-eTw">
+                                <rect key="frame" x="216" y="386" width="90" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="12" maxY="0.0"/>
+                                <state key="normal" title="＃">
+                                    <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="dialNumber:" destination="YqE-kK-xz0" eventType="touchUpInside" id="T7C-YB-EPh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LAV-aj-lA6">
+                                <rect key="frame" x="13" y="451" width="192" height="56"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.25098040699958801" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <state key="normal" title="语音">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="voiceDialing:" destination="YqE-kK-xz0" eventType="touchUpInside" id="anC-de-lx7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Dzj-X0-VAH">
+                                <rect key="frame" x="216" y="451" width="90" height="56"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <state key="normal" title="视频">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="videoDialing:" destination="YqE-kK-xz0" eventType="touchUpInside" id="tRh-sQ-4Hg"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3Sa-rY-fWN">
+                                <rect key="frame" x="20" y="46" width="267" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="tdd-Yp-07M">
+                                <rect key="frame" x="270" y="50" width="36" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <state key="normal" title="⇤">
+                                    <color key="titleColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="backspace:" destination="YqE-kK-xz0" eventType="touchUpInside" id="a7j-o5-1qR"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="recents" id="4XU-CO-IOE"/>
+                    <connections>
+                        <outlet property="backspaceButton" destination="tdd-Yp-07M" id="nAn-rg-rtV"/>
+                        <outlet property="peerAccount" destination="3Sa-rY-fWN" id="ee5-fC-ZOS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3vm-kc-sPC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="319" y="-17"/>
+            <point key="canvasLocation" x="319" y="-15"/>
         </scene>
         <!--Root Tab Bar View Controller-->
         <scene sceneID="22O-92-k9b">
@@ -108,10 +360,6 @@
         <scene sceneID="wlM-rR-h2a">
             <objects>
                 <viewController id="QDO-fM-Gt5" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="oiV-wX-pLd"/>
-                        <viewControllerLayoutGuide type="bottom" id="bvv-cc-201"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="9Rn-eo-IUN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -127,15 +375,11 @@
         <scene sceneID="O1d-eU-0FR">
             <objects>
                 <viewController storyboardIdentifier="CallingView" id="DZc-pv-Boa" customClass="IMCallingViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="lVS-Wn-1BF"/>
-                        <viewControllerLayoutGuide type="bottom" id="1lT-AM-P04"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="AGM-Gv-pnu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wOV-GP-6cJ">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="wOV-GP-6cJ">
                                 <rect key="frame" x="20" y="313" width="280" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.40000000596046448" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
@@ -148,11 +392,11 @@
                                     <action selector="cancelCalling:" destination="DZc-pv-Boa" eventType="touchUpInside" id="tRa-XM-dHb"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="peerAvatar" translatesAutoresizingMaskIntoConstraints="NO" id="xJp-kn-dY4">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="peerAvatar" id="xJp-kn-dY4">
                                 <rect key="frame" x="96" y="127" width="128" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="呼叫 Mike " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="KR0-TI-tdV">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="呼叫 Mike " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KR0-TI-tdV">
                                 <rect key="frame" x="20" y="263" width="280" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
@@ -168,21 +412,17 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r7T-44-pfh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="818" y="-6"/>
+            <point key="canvasLocation" x="1112" y="-6"/>
         </scene>
         <!--Answering View Controller-->
         <scene sceneID="Vlb-3Q-PK6">
             <objects>
                 <viewController storyboardIdentifier="AnsweringView" id="Jpe-nL-aFW" customClass="IMAnsweringViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="llU-fr-exY"/>
-                        <viewControllerLayoutGuide type="bottom" id="dCp-Oq-kWo"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="rc5-Vw-ueC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2w2-HF-IZH">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="2w2-HF-IZH">
                                 <rect key="frame" x="20" y="313" width="120" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -194,7 +434,7 @@
                                     <action selector="answerCall:" destination="Jpe-nL-aFW" eventType="touchUpInside" id="89p-XG-KYY"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="un1-2E-jKA">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="un1-2E-jKA">
                                 <rect key="frame" x="180" y="313" width="120" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -206,11 +446,11 @@
                                     <action selector="refuseCall:" destination="Jpe-nL-aFW" eventType="touchUpInside" id="x4r-1A-XGm"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="callerAvatar" translatesAutoresizingMaskIntoConstraints="NO" id="lNc-Wt-15r">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="callerAvatar" id="lNc-Wt-15r">
                                 <rect key="frame" x="96" y="127" width="128" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Demaen 来电" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="sTm-tc-YpO">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Demaen 来电" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sTm-tc-YpO">
                                 <rect key="frame" x="20" y="263" width="280" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>

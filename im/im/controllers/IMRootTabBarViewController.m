@@ -11,7 +11,6 @@
 #import "IMCallingViewController.h"
 #import "IMAnsweringViewController.h"
 @interface IMRootTabBarViewController ()
-@property(nonatomic,weak) UIStoryboard* sb;
 @end
 
 @implementation IMRootTabBarViewController
@@ -39,8 +38,7 @@
 }
 - (void) viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    //加载stroyboard
-    self.sb = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+
 
 }
 -(void)viewWillDisappear:(BOOL)animated{
@@ -68,14 +66,18 @@
     NSLog(@"收到通知，将要加载CallingView");
 #endif
 //加载“拨号中”界面
-    IMCallingViewController* callingViewController = [self.sb instantiateViewControllerWithIdentifier:CALLING_VIEW_CONTROLLER_ID];
+    //加载stroyboard
+    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+    IMCallingViewController* callingViewController = [sb instantiateViewControllerWithIdentifier:CALLING_VIEW_CONTROLLER_ID];
     [self presentViewController:callingViewController animated:YES completion:nil];
 }
 - (void) presentAnsweringView:(NSNotification*) notify{
 #if ROOT_TABBAR_DEBUG
     NSLog(@"收到通知，将要加载AnsweringView");
 #endif
-    IMAnsweringViewController* answeringViewController = [self.sb instantiateViewControllerWithIdentifier:ANSWERING_VIEW_CONTROLLER_ID];
+    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+    
+    IMAnsweringViewController* answeringViewController = [sb instantiateViewControllerWithIdentifier:ANSWERING_VIEW_CONTROLLER_ID];
     [self presentViewController:answeringViewController animated:YES completion:nil];
 }
 @end

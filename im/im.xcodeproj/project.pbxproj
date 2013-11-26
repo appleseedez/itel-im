@@ -29,6 +29,8 @@
 		BA6C2A7E18442B2600F19330 /* IMCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6C2A7C18442B2600F19330 /* IMCallingViewController.m */; };
 		BA6C2A811844311100F19330 /* IMAnsweringViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6C2A801844311100F19330 /* IMAnsweringViewController.m */; };
 		BA6C2A821844311100F19330 /* IMAnsweringViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6C2A801844311100F19330 /* IMAnsweringViewController.m */; };
+		BA6C2A85184457A500F19330 /* IMDailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6C2A84184457A500F19330 /* IMDailViewController.m */; };
+		BA6C2A86184457A500F19330 /* IMDailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6C2A84184457A500F19330 /* IMDailViewController.m */; };
 		BA7765B2183C05C200F48419 /* IMEngineImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7765B1183C05C200F48419 /* IMEngineImp.m */; };
 		BA7765B3183C05C200F48419 /* IMEngineImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7765B1183C05C200F48419 /* IMEngineImp.m */; };
 		BA7765B7183C0B1400F48419 /* IMTCPCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7765B6183C0B1400F48419 /* IMTCPCommunicator.m */; };
@@ -141,6 +143,8 @@
 		BA6C2A7C18442B2600F19330 /* IMCallingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMCallingViewController.m; sourceTree = "<group>"; };
 		BA6C2A7F1844311100F19330 /* IMAnsweringViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMAnsweringViewController.h; sourceTree = "<group>"; };
 		BA6C2A801844311100F19330 /* IMAnsweringViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMAnsweringViewController.m; sourceTree = "<group>"; };
+		BA6C2A83184457A500F19330 /* IMDailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMDailViewController.h; sourceTree = "<group>"; };
+		BA6C2A84184457A500F19330 /* IMDailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMDailViewController.m; sourceTree = "<group>"; };
 		BA7765B0183C05C200F48419 /* IMEngineImp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMEngineImp.h; sourceTree = "<group>"; };
 		BA7765B1183C05C200F48419 /* IMEngineImp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMEngineImp.m; sourceTree = "<group>"; };
 		BA7765B4183C078E00F48419 /* IMMessageParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMMessageParser.h; sourceTree = "<group>"; };
@@ -369,6 +373,8 @@
 				BA6C2A7C18442B2600F19330 /* IMCallingViewController.m */,
 				BA6C2A7F1844311100F19330 /* IMAnsweringViewController.h */,
 				BA6C2A801844311100F19330 /* IMAnsweringViewController.m */,
+				BA6C2A83184457A500F19330 /* IMDailViewController.h */,
+				BA6C2A84184457A500F19330 /* IMDailViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -721,6 +727,7 @@
 				BA3AA064184201AF000EDF50 /* IMSessionRefuseMessageBuilder.m in Sources */,
 				BAAA12B1183E7A770021C60D /* IMSessionPeriodResponseMessageBuilder.m in Sources */,
 				BA7765BF183C132800F48419 /* IMMessageParserImp.m in Sources */,
+				BA6C2A85184457A500F19330 /* IMDailViewController.m in Sources */,
 				BA776623183CBE7B00F48419 /* IMAuthMessageBuilder.m in Sources */,
 				BA26C79A1829DD2700C5CD39 /* main.m in Sources */,
 				BA7765B2183C05C200F48419 /* IMEngineImp.m in Sources */,
@@ -738,6 +745,7 @@
 				BA776628183CC11E00F48419 /* IMSeqenceGen.m in Sources */,
 				BA6C2A821844311100F19330 /* IMAnsweringViewController.m in Sources */,
 				BA77661B183C92C000F48419 /* NSString+MD5.m in Sources */,
+				BA6C2A86184457A500F19330 /* IMDailViewController.m in Sources */,
 				BA776624183CBE7B00F48419 /* IMAuthMessageBuilder.m in Sources */,
 				BA7765BC183C0ED000F48419 /* IMSessionInitMessageBuilder.m in Sources */,
 				BA7765B3183C05C200F48419 /* IMEngineImp.m in Sources */,
