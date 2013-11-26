@@ -54,7 +54,7 @@
 - (void) registerNotifications{
     // 当manager要求加载“拨打中”界面时，收到该通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentCallingView:) name:PRESENT_CALLING_VIEW_NOTIFICATION object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentAnsweringView:) name:PRESENT_ANSWERING_VIEW_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentAnsweringView:) name:SESSION_PERIOD_REQ_NOTIFICATION object:nil];
 }
 - (void) removeNotifications{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -69,6 +69,8 @@
     //加载stroyboard
     UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
     IMCallingViewController* callingViewController = [sb instantiateViewControllerWithIdentifier:CALLING_VIEW_CONTROLLER_ID];
+    callingViewController.manager = self.manager;
+    callingViewController.callingNotify = notify;
     [self presentViewController:callingViewController animated:YES completion:nil];
 }
 - (void) presentAnsweringView:(NSNotification*) notify{
@@ -78,6 +80,8 @@
     UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
     
     IMAnsweringViewController* answeringViewController = [sb instantiateViewControllerWithIdentifier:ANSWERING_VIEW_CONTROLLER_ID];
+    answeringViewController.manager = self.manager;
+    answeringViewController.callingNotify = notify;
     [self presentViewController:answeringViewController animated:YES completion:nil];
 }
 @end

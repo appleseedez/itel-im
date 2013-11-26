@@ -28,9 +28,11 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
-
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    self.peerAccountLabel.text =
+    [NSString stringWithFormat:@"用户 %@ 来电...",
+    [self.callingNotify.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY]];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -39,6 +41,7 @@
 }
 
 - (IBAction)answerCall:(UIButton *)sender {
+    [self.manager acceptSession:self.callingNotify];
 }
 
 - (IBAction)refuseCall:(UIButton *)sender {

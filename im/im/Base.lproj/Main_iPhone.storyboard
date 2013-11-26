@@ -5,6 +5,42 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
+        <!--In Session View Controller-->
+        <scene sceneID="5Wm-0R-sco">
+            <objects>
+                <viewController storyboardIdentifier="InSessionWithVoiceView" id="dOS-2r-8Ob" customClass="IMInSessionViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bDl-zd-k76">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="inSessionPeerAvatar" id="hdp-GG-DPA">
+                                <rect key="frame" x="96" y="127" width="128" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="通话中..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ku9-na-kkT">
+                                <rect key="frame" x="20" y="263" width="280" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Q5a-iv-8vQ">
+                                <rect key="frame" x="20" y="313" width="280" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="结 束 通 话">
+                                    <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pgW-lS-jE7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="722" y="628"/>
+        </scene>
         <!--Home View Controller-->
         <scene sceneID="p1v-Ss-2Dd">
             <objects>
@@ -60,7 +96,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ou5-0k-qfz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1326" y="0.0"/>
+            <point key="canvasLocation" x="1246" y="874"/>
         </scene>
         <!--Dail View Controller-->
         <scene sceneID="GnS-KE-j59">
@@ -247,9 +283,9 @@
                                 <rect key="frame" x="14" y="386" width="90" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="26"/>
-                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="12" maxY="0.0"/>
-                                <state key="normal" title="＊">
+                                <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="46"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="14" maxX="12" maxY="0.0"/>
+                                <state key="normal" title="*">
                                     <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 </state>
                                 <connections>
@@ -275,7 +311,7 @@
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
                                 <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="12" maxY="0.0"/>
-                                <state key="normal" title="＃">
+                                <state key="normal" title="#">
                                     <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 </state>
                                 <connections>
@@ -327,7 +363,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="recents" id="4XU-CO-IOE"/>
+                    <tabBarItem key="tabBarItem" systemItem="topRated" id="4XU-CO-IOE"/>
                     <connections>
                         <outlet property="backspaceButton" destination="tdd-Yp-07M" id="nAn-rg-rtV"/>
                         <outlet property="peerAccount" destination="3Sa-rY-fWN" id="ee5-fC-ZOS"/>
@@ -341,7 +377,7 @@
         <scene sceneID="22O-92-k9b">
             <objects>
                 <tabBarController definesPresentationContext="YES" id="UX2-ao-z6F" customClass="IMRootTabBarViewController" sceneMemberID="viewController">
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="1jM-xn-N1W">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -350,11 +386,13 @@
                     <connections>
                         <segue destination="YqE-kK-xz0" kind="relationship" relationship="viewControllers" id="xH2-ff-bmt"/>
                         <segue destination="QDO-fM-Gt5" kind="relationship" relationship="viewControllers" id="jWc-0h-mUM"/>
+                        <segue destination="SJ2-r8-tUo" kind="relationship" relationship="viewControllers" id="0Yi-rq-gkx"/>
+                        <segue destination="sBA-zm-JRp" kind="relationship" relationship="viewControllers" id="JTY-m8-Yzq"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jWj-5l-A8u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-215" y="309"/>
+            <point key="canvasLocation" x="-505" y="1071"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="wlM-rR-h2a">
@@ -370,6 +408,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3h4-YL-8VM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="319" y="635"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="gfd-qG-Xyf">
+            <objects>
+                <viewController id="SJ2-r8-tUo" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iRd-Fd-ovb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" systemItem="history" id="wdG-sA-5G2"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KqI-cL-Pch" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="319" y="1306"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="jfv-1B-bMy">
+            <objects>
+                <viewController id="sBA-zm-JRp" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gK7-Q9-0Mj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" systemItem="more" id="bae-iH-wAS"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2ft-Tr-Jmw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="291" y="1992"/>
         </scene>
         <!--Calling View Controller-->
         <scene sceneID="O1d-eU-0FR">
@@ -396,7 +464,7 @@
                                 <rect key="frame" x="96" y="127" width="128" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="呼叫 Mike " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KR0-TI-tdV">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KR0-TI-tdV">
                                 <rect key="frame" x="20" y="263" width="280" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
@@ -408,11 +476,12 @@
                     </view>
                     <connections>
                         <outlet property="PeerAvatarImageView" destination="xJp-kn-dY4" id="cVW-gn-KGV"/>
+                        <outlet property="peerAccountLabel" destination="KR0-TI-tdV" id="OqO-ML-Wux"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r7T-44-pfh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1112" y="-6"/>
+            <point key="canvasLocation" x="1116" y="-31"/>
         </scene>
         <!--Answering View Controller-->
         <scene sceneID="Vlb-3Q-PK6">
@@ -426,6 +495,7 @@
                                 <rect key="frame" x="20" y="313" width="120" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="接    听">
                                     <color key="titleColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -438,6 +508,7 @@
                                 <rect key="frame" x="180" y="313" width="120" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="拒    绝">
                                     <color key="titleColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -450,7 +521,7 @@
                                 <rect key="frame" x="96" y="127" width="128" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Demaen 来电" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sTm-tc-YpO">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sTm-tc-YpO">
                                 <rect key="frame" x="20" y="263" width="280" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
@@ -460,16 +531,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="peerAccountLabel" destination="sTm-tc-YpO" id="NFj-Aa-KFy"/>
                         <outlet property="peerAvatarImageView" destination="lNc-Wt-15r" id="9MS-96-UCj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4h8-8r-J8b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="782" y="733"/>
+            <point key="canvasLocation" x="722" y="-31"/>
         </scene>
     </scenes>
     <resources>
         <image name="callerAvatar" width="128" height="128"/>
+        <image name="inSessionPeerAvatar" width="128" height="128"/>
         <image name="peerAvatar" width="128" height="128"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

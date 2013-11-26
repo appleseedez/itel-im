@@ -31,6 +31,8 @@
 		BA6C2A821844311100F19330 /* IMAnsweringViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6C2A801844311100F19330 /* IMAnsweringViewController.m */; };
 		BA6C2A85184457A500F19330 /* IMDailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6C2A84184457A500F19330 /* IMDailViewController.m */; };
 		BA6C2A86184457A500F19330 /* IMDailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6C2A84184457A500F19330 /* IMDailViewController.m */; };
+		BA6C2A89184495B600F19330 /* IMInSessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6C2A88184495B600F19330 /* IMInSessionViewController.m */; };
+		BA6C2A8A184495B600F19330 /* IMInSessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6C2A88184495B600F19330 /* IMInSessionViewController.m */; };
 		BA7765B2183C05C200F48419 /* IMEngineImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7765B1183C05C200F48419 /* IMEngineImp.m */; };
 		BA7765B3183C05C200F48419 /* IMEngineImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7765B1183C05C200F48419 /* IMEngineImp.m */; };
 		BA7765B7183C0B1400F48419 /* IMTCPCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7765B6183C0B1400F48419 /* IMTCPCommunicator.m */; };
@@ -145,6 +147,8 @@
 		BA6C2A801844311100F19330 /* IMAnsweringViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMAnsweringViewController.m; sourceTree = "<group>"; };
 		BA6C2A83184457A500F19330 /* IMDailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMDailViewController.h; sourceTree = "<group>"; };
 		BA6C2A84184457A500F19330 /* IMDailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMDailViewController.m; sourceTree = "<group>"; };
+		BA6C2A87184495B600F19330 /* IMInSessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMInSessionViewController.h; sourceTree = "<group>"; };
+		BA6C2A88184495B600F19330 /* IMInSessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMInSessionViewController.m; sourceTree = "<group>"; };
 		BA7765B0183C05C200F48419 /* IMEngineImp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMEngineImp.h; sourceTree = "<group>"; };
 		BA7765B1183C05C200F48419 /* IMEngineImp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMEngineImp.m; sourceTree = "<group>"; };
 		BA7765B4183C078E00F48419 /* IMMessageParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMMessageParser.h; sourceTree = "<group>"; };
@@ -375,6 +379,8 @@
 				BA6C2A801844311100F19330 /* IMAnsweringViewController.m */,
 				BA6C2A83184457A500F19330 /* IMDailViewController.h */,
 				BA6C2A84184457A500F19330 /* IMDailViewController.m */,
+				BA6C2A87184495B600F19330 /* IMInSessionViewController.h */,
+				BA6C2A88184495B600F19330 /* IMInSessionViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -712,6 +718,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA77661F183C9F8A00F48419 /* NSData+Byte.m in Sources */,
+				BA6C2A89184495B600F19330 /* IMInSessionViewController.m in Sources */,
 				BAAA12AD183E10050021C60D /* IMSessionPeriodRequestMessageBuilder.m in Sources */,
 				BA7765C3183C170500F48419 /* IMDataPool.m in Sources */,
 				BAAA12B5183EDD250021C60D /* IMHomeViewController.m in Sources */,
@@ -740,6 +747,7 @@
 			files = (
 				BA7765B8183C0B1400F48419 /* IMTCPCommunicator.m in Sources */,
 				BAAA12B6183EDD250021C60D /* IMHomeViewController.m in Sources */,
+				BA6C2A8A184495B600F19330 /* IMInSessionViewController.m in Sources */,
 				BAAA12B2183E7A770021C60D /* IMSessionPeriodResponseMessageBuilder.m in Sources */,
 				BA7765C4183C170500F48419 /* IMDataPool.m in Sources */,
 				BA776628183CC11E00F48419 /* IMSeqenceGen.m in Sources */,

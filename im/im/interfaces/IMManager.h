@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "ConstantHeader.h"
 @protocol IMManager <NSObject>
+- (NSString*) selfAccount;
 //拨号
 - (void) dial:(NSString*) account;
 // 开始通话过程

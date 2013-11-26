@@ -234,6 +234,10 @@
 #endif
         [self.engine tunnelWith:notify.userInfo];
         [self.engine startTransport];
+        //通知view可以切换的到“通话中"界面了
+        [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_INSESSION_VIEW_NOTIFICATION
+                                                            object:nil
+                                                          userInfo:notify.userInfo];
     }else if ([self.state isEqualToString:IDLE]){ //如果是idle状态下，接到了通话信令，则是有人拨打
 #if MANAGER_DEBUG
         NSLog(@"收到通话请求，用户操作可以接听");
@@ -292,7 +296,7 @@
     [self.communicator connect];
     [self.communicator keepAlive];
     //向信令服务器发验证请求
-    self.selfAccount = @"1";
+    self.selfAccount = @"2000";
     [self auth:self.selfAccount cert:@"chengjianjun"];
     
 }
@@ -326,5 +330,9 @@
 }
 - (void)haltSession:(NSDictionary*) data{
     [self sessionHaltRequest:data];
+}
+
+- (NSString *)selfAccount{
+    return _selfAccount;
 }
 @end
