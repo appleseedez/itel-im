@@ -17,21 +17,6 @@
 
 @implementation IMManagerImp
 #pragma mark - LOGIC
-// 启动~
-// 燥起来吧，董小姐
-- (void) boot{
-    //环境初始化
-    [self.engine initNetwork];
-    [self.engine initMedia];
-    //连接信令服务器
-    [self.communicator connect];
-    [self.communicator keepAlive];
-    //向信令服务器发验证请求
-    self.selfAccount = @"1";
-    [self auth:self.selfAccount cert:@"chengjianjun"];
-    [self endSession];
-}
-
 
 - (void) testSessionStart:(NSString*) destAccount{
     // 通话查询开始
@@ -83,7 +68,6 @@
     self.communicator = [[IMTCPCommunicator alloc] init];// 网络通信器
     self.messageParser = [[IMMessageParserImp alloc] init]; // 信令解析器
 }
-
 //根据数据的具体类型做操作路由
 - (void) route:(NSDictionary*) data{
     NSInteger type = -1;
@@ -140,7 +124,9 @@
  */
 - (void) sessionPeriodNegotiation:(NSDictionary*) negotiationData{
     NSDictionary* parsedData =  [self.messageParser parse:negotiationData];
+#if MANAGER_DEBUG
     NSLog(@"获取到的谈判数据：%@",parsedData);
+#endif
     NSString* forwardIP = [parsedData valueForKey:SESSION_INIT_RES_FIELD_FORWARD_IP_KEY];
     NSInteger forwardPort = [[parsedData valueForKey:SESSION_INIT_RES_FIELD_FORWARD_PORT_KEY] integerValue];
     // 获取本机natType
@@ -175,7 +161,9 @@
  *  @param notify 拒绝数据
  */
 - (void) sessionHalt:(NSNotification*) notify{
+#if MANAGER_DEBUG
     NSLog(@"收到拒绝信令回复");
+#endif
     NSString* haltType = [notify.userInfo valueForKey:SESSION_HALT_FIELD_TYPE_KEY];
     if ([SESSION_HALT_FILED_ACTION_BUSY isEqualToString:haltType]) {
         [self endSession];
@@ -195,7 +183,9 @@
  */
 
 -(void) sessionHaltRequest:(NSDictionary*) refuseData{
+#if MANAGER_DEBUG
     NSLog(@"发送拒绝信令");
+#endif
     // 处理参数
     NSDictionary* params = @{
                              DATA_TYPE_KEY:[NSNumber numberWithInteger:SESSION_PERIOD_HALT_TYPE],
@@ -212,13 +202,17 @@
 
 // 信令回复数据的处理 采用通知来完成
 - (void) receive:(NSNotification*) notify{
+#if MANAGER_DEBUG
     NSLog(@"收到数据，路由给处理逻辑");
+#endif
     [self route:notify.userInfo];
 }
 
 //收到信令服务器的通话查询响应，进行后续业务
 - (void) sessionInited:(NSNotification*) notify{
+#if MANAGER_DEBUG
     NSLog(@"收到通话查询响应~");
+#endif
     NSMutableDictionary *data = [notify.userInfo mutableCopy];
     [data addEntriesFromDictionary:@{
                                     SESSION_SRC_SSID_KEY:[notify.userInfo valueForKey:SESSION_INIT_RES_FIELD_SSID_KEY],
@@ -235,11 +229,15 @@
     NSString* currentDest = [notify.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY];
     if ([self.state isEqualToString:currentDest]) { //如果收到的通话信令就是自己正在拨打的。则表明自己是拨打方，可以开始p2p流程了
         //开始获取p2p通道
+#if MANAGER_DEBUG
         NSLog(@"收到响应，开始通话");
+#endif
         [self.engine tunnelWith:notify.userInfo];
         [self.engine startTransport];
     }else if ([self.state isEqualToString:IDLE]){ //如果是idle状态下，接到了通话信令，则是有人拨打
+#if MANAGER_DEBUG
         NSLog(@"收到通话请求，用户操作可以接听");
+#endif
         //通知界面，弹出通话接听界面:[self sessionPeriodResponse:notify]
         [[NSNotificationCenter defaultCenter] postNotificationName:SESSION_PERIOD_REQ_NOTIFICATION object:nil userInfo:notify.userInfo];
     }else{//剩余的情况表明。当前正在通话中，应该拒绝 这里会是自动拒绝 
@@ -268,7 +266,9 @@
 
 //收到信令服务器的验证响应，
 - (void) authHasResult:(NSNotification*) notify{
+#if MANAGER_DEBUG
     NSLog(@"收到信令服务器端帐号验证响应~");
+#endif
 }
 
 #pragma mark - INTERFACE
@@ -276,15 +276,39 @@
 // IMManager 接口的实现
 - (void)setup{
     [self injectDependency];
-    [self registerNotifications];
-    //启动
-    [self boot];
+    //环境初始化
+    [self.engine initNetwork];
+    [self.engine initMedia];
+    [self endSession];
 }
 
-- (void) tearDown{
-    [self removeNotifications];
-    [self.communicator disconnect];
+- (void)connectToSignalServer{
+#if MANAGER_DEBUG
+    NSLog(@"开始连接信令服务器");
+#endif
+    //注册事件
+    [self registerNotifications];
+    //连接信令服务器
+    [self.communicator connect];
+    [self.communicator keepAlive];
+    //向信令服务器发验证请求
+    self.selfAccount = @"1";
+    [self auth:self.selfAccount cert:@"chengjianjun"];
     
+}
+- (void)disconnectToSignalServer{
+    [self.communicator disconnect];
+    [self removeNotifications];
+}
+- (void) tearDown{
+#if MANAGER_DEBUG
+    NSLog(@"call tearDown");
+#endif
+    [self disconnectToSignalServer];
+    [self.engine tearDown];
+    self.engine=nil;
+    self.communicator =  nil;
+    self.messageBuilder = nil;
 }
 - (void)startSession:(NSString*) destAccount{
     self.state = destAccount;

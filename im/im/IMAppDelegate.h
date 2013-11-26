@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "IMManager.h"
 @interface IMAppDelegate : UIResponder <UIApplicationDelegate>
 @property (strong, nonatomic) UIWindow *window;
+//由applicationDelegate来管理manager
+@property (nonatomic,strong) id<IMManager> manager;
 @end

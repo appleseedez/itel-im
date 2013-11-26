@@ -27,5 +27,5 @@
 - (void) openScreen;
 //关闭远端视频输入窗口
 - (void) closeScreen;
-
+- (void) tearDown;
 @end

@@ -17,6 +17,10 @@
 - (void) endSession;
 // 初始化&启动
 - (void) setup;
+// 连接服务器
+- (void) connectToSignalServer;
+// 断开连接
+-(void) disconnectToSignalServer;
 //销毁
 - (void) tearDown;
 //接受通话请求

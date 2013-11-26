@@ -7,44 +7,65 @@
 //
 
 #import "IMAppDelegate.h"
+#import "IMManagerImp.h"
+#import "IMRootTabBarViewController.h"
+@interface IMAppDelegate()
+
+@end
 
 @implementation IMAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-//    NSDictionary* testData = @{@"head":@"this is head",@"body":@{@"type":@"this is body type",@"data":@"this is data"}};
-//    NSData* tempData  = [NSJSONSerialization dataWithJSONObject:testData options:0 error:nil];
-//    NSDictionary* resultData = [NSJSONSerialization JSONObjectWithData:tempData options:NSJSONReadingMutableContainers error:nil];
-//    
-//    NSLog(@"%@",resultData);
+    //初始化
+#if APP_DELEGATE_DEBUG
+    NSLog(@"调用 didFinishLaunchingWithOptions");
+#endif
+    self.manager = [[IMManagerImp alloc] init];
+    [self.manager setup];
+    IMRootTabBarViewController* rootController =(IMRootTabBarViewController*) self.window.rootViewController;
+    rootController.manager = self.manager;
     return YES;
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+#if APP_DELEGATE_DEBUG
+    NSLog(@"调用 applicationWillResignActive");
+#endif
+    [self.manager disconnectToSignalServer];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+#if APP_DELEGATE_DEBUG
+    NSLog(@"调用 applicationDidEnterBackground");
+#endif
+    [self.manager tearDown];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+#if APP_DELEGATE_DEBUG
+    NSLog(@"调用 applicationWillEnterForeground ");
+#endif
+    [self.manager setup];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+#if APP_DELEGATE_DEBUG
+    NSLog(@"调用 applicationDidBecomeActive ");
+#endif
+    [self.manager connectToSignalServer];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+#if APP_DELEGATE_DEBUG
+    NSLog(@"调用 applicationWillTerminate");
+#endif
+    [self.manager tearDown];
 }
 
 @end

@@ -33,7 +33,7 @@
 }
 
 - (void) sendHeartBeat{
-#if DEBUG
+#if COMMUNICATOR_DEBUG
     NSLog(@"开始心跳了");
 #endif
     [self sendRequest:self.heartBeatPKG type:HEART_BEAT_REQ_TYPE];
@@ -71,11 +71,16 @@
 // GCDAysncSocket 接口
 // 链接上了服务器
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port{
+#if COMMUNICATOR_DEBUG
+    NSLog(@"连接上了信令服务器");
+#endif
     [sock readDataToLength:sizeof(uint16_t) withTimeout:-1 tag:HEAD_REQ];
 }
 // 断开了服务器链接
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err{
+#if COMMUNICATOR_DEBUG
     NSLog(@"从服务器断开了~");
+#endif
 }
 
 // 有数据来。我们的数据是分成两部分的 :
@@ -137,10 +142,12 @@
 }
 
 - (void)disconnect{
+#if COMMUNICATOR_DEBUG
     NSLog(@"尝试主动断开链接");
+#endif
     // 终止心跳
     [self.heartBeat invalidate];
-    [self.sock disconnectAfterReadingAndWriting];
+    [self.sock disconnect];
 }
 
 - (void)send:(NSDictionary*) data{
@@ -150,6 +157,9 @@
 
 - (void)receive:(NSDictionary*) data{
     //通知相应的业务，数据来了
+#if COMMUNICATOR_DEBUG
+    NSLog(@"有数据来了");
+#endif
     [[NSNotificationCenter defaultCenter] postNotificationName:DATA_RECEIVED_NOTIFICATION object:nil userInfo:data];
 }
 

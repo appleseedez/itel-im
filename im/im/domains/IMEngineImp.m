@@ -205,5 +205,7 @@ UIImageView* _pview_local;
     
 }
 
-
+- (void)tearDown{
+    self.pInterfaceApi->Terminate();
+}
 @end

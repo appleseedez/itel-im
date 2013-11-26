@@ -23,6 +23,12 @@
 		BA26C7BC1829DD2800C5CD39 /* imTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BA26C7BB1829DD2800C5CD39 /* imTests.m */; };
 		BA3AA064184201AF000EDF50 /* IMSessionRefuseMessageBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3AA063184201AF000EDF50 /* IMSessionRefuseMessageBuilder.m */; };
 		BA3AA065184201AF000EDF50 /* IMSessionRefuseMessageBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3AA063184201AF000EDF50 /* IMSessionRefuseMessageBuilder.m */; };
+		BA6C2A7918441CFD00F19330 /* IMRootTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6C2A7818441CFD00F19330 /* IMRootTabBarViewController.m */; };
+		BA6C2A7A18441CFD00F19330 /* IMRootTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6C2A7818441CFD00F19330 /* IMRootTabBarViewController.m */; };
+		BA6C2A7D18442B2600F19330 /* IMCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6C2A7C18442B2600F19330 /* IMCallingViewController.m */; };
+		BA6C2A7E18442B2600F19330 /* IMCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6C2A7C18442B2600F19330 /* IMCallingViewController.m */; };
+		BA6C2A811844311100F19330 /* IMAnsweringViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6C2A801844311100F19330 /* IMAnsweringViewController.m */; };
+		BA6C2A821844311100F19330 /* IMAnsweringViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6C2A801844311100F19330 /* IMAnsweringViewController.m */; };
 		BA7765B2183C05C200F48419 /* IMEngineImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7765B1183C05C200F48419 /* IMEngineImp.m */; };
 		BA7765B3183C05C200F48419 /* IMEngineImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7765B1183C05C200F48419 /* IMEngineImp.m */; };
 		BA7765B7183C0B1400F48419 /* IMTCPCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7765B6183C0B1400F48419 /* IMTCPCommunicator.m */; };
@@ -129,6 +135,12 @@
 		BA26C7BB1829DD2800C5CD39 /* imTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = imTests.m; sourceTree = "<group>"; };
 		BA3AA062184201AF000EDF50 /* IMSessionRefuseMessageBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMSessionRefuseMessageBuilder.h; sourceTree = "<group>"; };
 		BA3AA063184201AF000EDF50 /* IMSessionRefuseMessageBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMSessionRefuseMessageBuilder.m; sourceTree = "<group>"; };
+		BA6C2A7718441CFD00F19330 /* IMRootTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMRootTabBarViewController.h; sourceTree = "<group>"; };
+		BA6C2A7818441CFD00F19330 /* IMRootTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMRootTabBarViewController.m; sourceTree = "<group>"; };
+		BA6C2A7B18442B2600F19330 /* IMCallingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMCallingViewController.h; sourceTree = "<group>"; };
+		BA6C2A7C18442B2600F19330 /* IMCallingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMCallingViewController.m; sourceTree = "<group>"; };
+		BA6C2A7F1844311100F19330 /* IMAnsweringViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMAnsweringViewController.h; sourceTree = "<group>"; };
+		BA6C2A801844311100F19330 /* IMAnsweringViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMAnsweringViewController.m; sourceTree = "<group>"; };
 		BA7765B0183C05C200F48419 /* IMEngineImp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMEngineImp.h; sourceTree = "<group>"; };
 		BA7765B1183C05C200F48419 /* IMEngineImp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMEngineImp.m; sourceTree = "<group>"; };
 		BA7765B4183C078E00F48419 /* IMMessageParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMMessageParser.h; sourceTree = "<group>"; };
@@ -351,6 +363,12 @@
 			children = (
 				BAAA12B3183EDD250021C60D /* IMHomeViewController.h */,
 				BAAA12B4183EDD250021C60D /* IMHomeViewController.m */,
+				BA6C2A7718441CFD00F19330 /* IMRootTabBarViewController.h */,
+				BA6C2A7818441CFD00F19330 /* IMRootTabBarViewController.m */,
+				BA6C2A7B18442B2600F19330 /* IMCallingViewController.h */,
+				BA6C2A7C18442B2600F19330 /* IMCallingViewController.m */,
+				BA6C2A7F1844311100F19330 /* IMAnsweringViewController.h */,
+				BA6C2A801844311100F19330 /* IMAnsweringViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -694,9 +712,12 @@
 				BA7765B7183C0B1400F48419 /* IMTCPCommunicator.m in Sources */,
 				BA77661A183C92C000F48419 /* NSString+MD5.m in Sources */,
 				BA7765BB183C0ED000F48419 /* IMSessionInitMessageBuilder.m in Sources */,
+				BA6C2A811844311100F19330 /* IMAnsweringViewController.m in Sources */,
 				BA795AEA183BF93E00466D8E /* IMManagerImp.m in Sources */,
+				BA6C2A7918441CFD00F19330 /* IMRootTabBarViewController.m in Sources */,
 				BA776627183CC11E00F48419 /* IMSeqenceGen.m in Sources */,
 				BA26C79E1829DD2700C5CD39 /* IMAppDelegate.m in Sources */,
+				BA6C2A7D18442B2600F19330 /* IMCallingViewController.m in Sources */,
 				BA3AA064184201AF000EDF50 /* IMSessionRefuseMessageBuilder.m in Sources */,
 				BAAA12B1183E7A770021C60D /* IMSessionPeriodResponseMessageBuilder.m in Sources */,
 				BA7765BF183C132800F48419 /* IMMessageParserImp.m in Sources */,
@@ -715,6 +736,7 @@
 				BAAA12B2183E7A770021C60D /* IMSessionPeriodResponseMessageBuilder.m in Sources */,
 				BA7765C4183C170500F48419 /* IMDataPool.m in Sources */,
 				BA776628183CC11E00F48419 /* IMSeqenceGen.m in Sources */,
+				BA6C2A821844311100F19330 /* IMAnsweringViewController.m in Sources */,
 				BA77661B183C92C000F48419 /* NSString+MD5.m in Sources */,
 				BA776624183CBE7B00F48419 /* IMAuthMessageBuilder.m in Sources */,
 				BA7765BC183C0ED000F48419 /* IMSessionInitMessageBuilder.m in Sources */,
@@ -722,7 +744,9 @@
 				BA7765C0183C132800F48419 /* IMMessageParserImp.m in Sources */,
 				BA795AEB183BF93E00466D8E /* IMManagerImp.m in Sources */,
 				BA776620183C9F8A00F48419 /* NSData+Byte.m in Sources */,
+				BA6C2A7A18441CFD00F19330 /* IMRootTabBarViewController.m in Sources */,
 				BA26C7BC1829DD2800C5CD39 /* imTests.m in Sources */,
+				BA6C2A7E18442B2600F19330 /* IMCallingViewController.m in Sources */,
 				BAAA12AE183E10050021C60D /* IMSessionPeriodRequestMessageBuilder.m in Sources */,
 				BA3AA065184201AF000EDF50 /* IMSessionRefuseMessageBuilder.m in Sources */,
 			);
