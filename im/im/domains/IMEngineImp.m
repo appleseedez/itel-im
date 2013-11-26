@@ -200,6 +200,7 @@ UIImageView* _pview_local;
         // 摆正摄像头位置
         self.pInterfaceApi->VieSetRotation([self getCameraOrientation:self.pInterfaceApi->VieGetCameraOrientation(0)]);
     }
+    
 }
 - (void)closeScreen{
     

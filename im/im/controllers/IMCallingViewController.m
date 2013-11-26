@@ -45,6 +45,7 @@ static int soundCount;
 }
 
 - (IBAction)cancelCalling:(UIButton *)sender {
+    [self.manager haltSession:nil];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -61,7 +62,7 @@ static int soundCount;
 
 - (void) tearDown{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    //用户取消了。终止声音播放
+    //终止拨号音
     AudioServicesRemoveSystemSoundCompletion(DIALING_SOUND_ID);
     AudioServicesDisposeSystemSoundID(DIALING_SOUND_ID);
 }

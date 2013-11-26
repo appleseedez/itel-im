@@ -10,5 +10,6 @@
 #import "IMManager.h"
 @interface IMInSessionViewController : UIViewController
 @property(nonatomic,weak) id<IMManager> manager;
+- (IBAction)endSession:(UIButton *)sender;
 @property(nonatomic,strong) NSNotification* inSessionNotify;
 @end

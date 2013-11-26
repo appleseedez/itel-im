@@ -26,7 +26,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    //开启视频窗口，调整摄像头
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,4 +35,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void) setup{
+    
+}
+
+- (void) tearDown{
+    
+}
+
+- (IBAction)endSession:(UIButton *)sender {
+    [self.manager haltSession:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end
