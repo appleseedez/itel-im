@@ -29,4 +29,5 @@
 //关闭远端视频输入窗口
 - (void) closeScreen;
 - (void) tearDown;
+- (void) keepSessionAlive:(NSString*) probeServerIP port:(NSInteger) port;
 @end

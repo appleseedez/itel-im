@@ -12,6 +12,7 @@
 #import "IMInSessionViewController.h"
 static int soundCount;
 @interface IMCallingViewController ()
+@property(nonatomic) NSNotification* inSessionNotify;
 @end
 
 @implementation IMCallingViewController
@@ -45,7 +46,11 @@ static int soundCount;
 }
 
 - (IBAction)cancelCalling:(UIButton *)sender {
-    [self.manager haltSession:nil];
+    NSMutableDictionary* cancelCallNotifyMut = [self.callingNotify.userInfo mutableCopy];
+    [cancelCallNotifyMut addEntriesFromDictionary:@{
+                                                  SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_END
+                                                  }];
+    [self.manager haltSession:cancelCallNotifyMut];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -83,11 +88,21 @@ void soundPlayCallback(SystemSoundID soundId, void *clientData){
 
 #pragma mark - HANDLER
 - (void)intoSession:(NSNotification*) notify{
-    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-    IMInSessionViewController* insessionController = [sb instantiateViewControllerWithIdentifier:INSESSION_VIEW_CONTROLLER_ID];
-    insessionController.manager = self.manager;
-    insessionController.inSessionNotify = notify;
-    [self presentViewController:insessionController animated:YES completion:nil];
+//    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+//    IMInSessionViewController* insessionController = [sb instantiateViewControllerWithIdentifier:INSESSION_VIEW_CONTROLLER_ID];
+    self.inSessionNotify = notify;
+    [self performSegueWithIdentifier:@"sessionRequestAcceptedByPeerSegue" sender:self];
+//    [self presentViewController:insessionController animated:YES completion:nil];
+//    [self dismissViewControllerAnimated:YES completion:nil];
     
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"sessionRequestAcceptedByPeerSegue"]) {
+        IMInSessionViewController* insessionController = (IMInSessionViewController*)segue.destinationViewController;
+        IMCallingViewController* target = (IMCallingViewController*) sender;
+        insessionController.manager = target.manager;
+        insessionController.inSessionNotify = target.inSessionNotify;
+    }
 }
 @end

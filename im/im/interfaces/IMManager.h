@@ -10,7 +10,7 @@
 #import "ConstantHeader.h"
 #import "render_view.h"
 @protocol IMManager <NSObject>
-- (NSString*) selfAccount;
+- (NSString*) myAccount;
 //拨号
 - (void) dial:(NSString*) account;
 // 开始通话过程
@@ -29,6 +29,8 @@
 - (void) acceptSession:(NSNotification*) notify;
 // 终止通话请求
 - (void)haltSession:(NSDictionary*) data;
+- (void) lockScreenForSession;
+- (void) unlockScreenForSession;
 //设置视频输出窗口
 - (void) openScreen:(RenderView*) remoteRenderView;
 //关闭视频窗口

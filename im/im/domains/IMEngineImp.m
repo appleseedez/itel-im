@@ -123,6 +123,7 @@ UIImageView* _pview_local;
 }
 
 - (int)tunnelWith:(NSDictionary*) params{
+    NSLog(@"开始获取p2p通道");
      TP2PPeerArgc argc;
     
     
@@ -157,8 +158,11 @@ UIImageView* _pview_local;
     NSLog(@"通话参数：对方内网port:%i",argc.otherLocalPort);
     NSLog(@"通话参数：对方ssid：%i",argc.otherSsid);
     NSLog(@"通话参数：自己ssid：%i",argc.selfSsid);
+    NSTimeInterval startTime = [[NSDate date] timeIntervalSince1970];
     self.pInterfaceApi->GetP2PPeer(argc);
-    
+    NSTimeInterval endTime = [[NSDate date] timeIntervalSince1970];
+    long long  dTime =endTime - startTime;
+    NSLog(@"调用时间间隔：%@",[NSString stringWithFormat:@"%llu",dTime]);
     bool ret;
     NSLog(@"isLocal的状态：%d",argc.islocal);
     if (argc.islocal)
@@ -182,7 +186,6 @@ UIImageView* _pview_local;
     }
     
     
-    
     return ret;
 }
 - (BOOL)startTransport{
@@ -193,6 +196,8 @@ UIImageView* _pview_local;
 
 - (void)stopTransport{
     self.pInterfaceApi->StopMedia(self.m_type);
+    //通知界面
+    [[NSNotificationCenter defaultCenter] postNotificationName:END_SESSION_NOTIFICATION object:nil userInfo:nil];
 }
 - (void)openScreen:(RenderView*) remoteRenderView{
     // 开启摄像头
@@ -209,5 +214,10 @@ UIImageView* _pview_local;
 
 - (void)tearDown{
     self.pInterfaceApi->Terminate();
+}
+
+- (void)keepSessionAlive:(NSString*) probeServerIP port:(NSInteger)port{
+    u_int8_t tick = 0xFF;
+    self.pInterfaceApi->SendUserData(&tick, sizeof(u_int8_t), [probeServerIP UTF8String], port);
 }
 @end

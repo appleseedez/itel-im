@@ -46,9 +46,6 @@
                           @"#":[NSNumber numberWithInt:1211]
                           
                           };
-	// Do any additional setup after loading the view.
-    IMRootTabBarViewController* root =(IMRootTabBarViewController*)self.tabBarController;
-    self.manager = root.manager;
 }
 
 
@@ -59,6 +56,11 @@
     }else{
         self.backspaceButton.hidden = NO;
     }
+    [self setup];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [self tearDown];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -73,10 +75,27 @@
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_CALLING_VIEW_NOTIFICATION object:nil userInfo:@{
                                                                                                                        SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:peerAccount,
-                                                                                                                       SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[self.manager selfAccount]
+                                                                                                                       SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:[self.manager myAccount]
                                                                                                                        }];
     [self.manager dial:peerAccount];
     
+}
+- (void) setup{
+    [self registerNotifications];
+    IMRootTabBarViewController* root =(IMRootTabBarViewController*)self.tabBarController;
+    self.manager = root.manager;
+}
+- (void) tearDown{
+    [self removeNotifications];
+}
+- (void) registerNotifications{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authOK:) name:CMID_APP_LOGIN_SSS_NOTIFICATION object:nil];
+}
+- (void) removeNotifications{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+- (void) authOK:(NSNotification*) notify{
+    self.selfAccountLabel.text = [NSString stringWithFormat:@"本机号码：%@", [self.manager myAccount]];
 }
 
 - (IBAction)videoDialing:(UIButton *)sender {

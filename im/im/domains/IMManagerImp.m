@@ -13,6 +13,7 @@
 //状态标识符，表明当前所处的状态。目前只有占用和空闲两种 占用：IN_USE，空闲：IDLE
 @property (nonatomic,copy) NSString* state;
 @property (nonatomic,copy) NSString* selfAccount;
+@property (nonatomic,strong) NSTimer* keepSessionAlive;//从获取到外网地址，到收到通话回复。
 @end
 
 @implementation IMManagerImp
@@ -57,6 +58,7 @@
     //登录到信令服务器后，需要做一次验证，验证信息响应时，发出该通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authHasResult:) name:CMID_APP_LOGIN_SSS_NOTIFICATION object:nil];
 }
+
 //移除通知 防止leak
 - (void) removeNotifications{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -67,6 +69,7 @@
     self.engine = [[IMEngineImp alloc] init];// 引擎
     self.communicator = [[IMTCPCommunicator alloc] init];// 网络通信器
     self.messageParser = [[IMMessageParserImp alloc] init]; // 信令解析器
+    
 }
 //根据数据的具体类型做操作路由
 - (void) route:(NSDictionary*) data{
@@ -133,7 +136,10 @@
     NatType natType = [self.engine natType];
     // 获取本机的链路列表. 中继服务器目前充当外网地址探测
     NSDictionary* communicationAddress = [self.engine endPointAddressWithProbeServer:forwardIP port:forwardPort];
-    
+    [self.keepSessionAlive invalidate];
+// 获取到外网地址后，开始发送数据包到外网地址探测服务器，直到收到对等方的回复。
+    NSLog(@"开始进行保持外网session的数据包发送");
+    self.keepSessionAlive = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(keepSession:) userInfo:@{PROBE_PORT_KEY:[NSNumber numberWithInteger:forwardPort],PROBE_SERVER_KEY:forwardIP} repeats:YES];
     //此处我需要做的是字典的数据融合！！！
     NSMutableDictionary* mergeData = [communicationAddress mutableCopy];
     //将信令服务器返回的通话查询请求的响应中的转发地址和目的号码取出来，合并进新的通话请求信令中
@@ -154,6 +160,15 @@
     // 构造通话数据请求
     NSDictionary* data = [self.messageBuilder buildWithParams:mergeData];
     [self.communicator send:data];
+}
+
+
+- (void) keepSession:(NSTimer*) timer{
+    NSLog(@"开始发送保持session的数据包");
+    NSDictionary* param = [timer userInfo];
+    NSString* probeServerIP = [param valueForKey:PROBE_SERVER_KEY];
+    NSInteger port = [[param valueForKey:PROBE_PORT_KEY] integerValue];
+    [self.engine keepSessionAlive:probeServerIP port:port];
 }
 /**
  *  收到终止信令的回复
@@ -228,10 +243,15 @@
 - (void) sessionPeriod:(NSNotification*) notify{
     NSString* currentDest = [notify.userInfo valueForKey:SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY];
     if ([self.state isEqualToString:currentDest]) { //如果收到的通话信令就是自己正在拨打的。则表明自己是拨打方，可以开始p2p流程了
-        //开始获取p2p通道
+        //开始获取p2p通道，保持session的数据包可以停止发送了。
 #if MANAGER_DEBUG
         NSLog(@"收到响应，开始通话");
 #endif
+        [self.keepSessionAlive invalidate];
+        self.keepSessionAlive = nil;
+    NSLog(@"开始通话，停止session保持数据包的发送，开始获取p2p通道");
+        
+        NSLog(@"收到PEER的链路数据：%@",notify.userInfo);
         [self.engine tunnelWith:notify.userInfo];
         [self.engine startTransport];
         //通知view可以切换的到“通话中"界面了
@@ -264,6 +284,9 @@
     // 把自身的链路信息作为响应发出，表明本机接受通话请求
     [self sessionPeriodNegotiation:notify.userInfo];
     // 开始获取p2p通道
+    [self.keepSessionAlive invalidate];
+    self.keepSessionAlive = nil;
+    NSLog(@"接受通话请求，停止session保持数据包的发送，开始获取p2p通道");
     [self.engine tunnelWith:notify.userInfo];
     [self.engine startTransport];
 }
@@ -284,6 +307,7 @@
     [self.engine initNetwork];
     [self.engine initMedia];
     [self endSession];
+    self.selfAccount = [NSString stringWithFormat:@"%d",arc4random()%1000];
 }
 
 - (void)connectToSignalServer{
@@ -295,8 +319,27 @@
     //连接信令服务器
     [self.communicator connect];
     [self.communicator keepAlive];
+    
+//    NSString *urlAsString = @"http://192.168.1.106:2000";
+//    NSURL *url = [NSURL URLWithString:urlAsString];
+//    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
+//    NSOperationQueue *queue = [[NSOperationQueue alloc]init];
+//    [NSURLConnection sendAsynchronousRequest:urlRequest queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+//        //
+//        if ([data length]) {
+//            NSDictionary* accountJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+//            NSString* randomAccount = [accountJSON valueForKey:@"number"];
+//            self.selfAccount = randomAccount;
+//            NSLog(@"获取到的随机帐号：%@",randomAccount);
+//        }
+//
+//    }];
+    
     //向信令服务器发验证请求
-    self.selfAccount = @"1000";
+    if (!self.selfAccount) {
+        self.selfAccount = @"6666";
+    }
+    NSLog(@"目前的本机帐号：%@",[self myAccount]);
     [self auth:self.selfAccount cert:@"chengjianjun"];
     
 }
@@ -336,9 +379,15 @@
     [self.engine openScreen:remoteRenderView];
 }
 - (void)closeScreen{
-    
 }
-- (NSString *)selfAccount{
-    return _selfAccount;
+- (void)lockScreenForSession{
+    [UIApplication sharedApplication].idleTimerDisabled=YES;
+}
+
+- (void)unlockScreenForSession{
+    [UIApplication sharedApplication].idleTimerDisabled=NO;
+}
+- (NSString *)myAccount{
+    return self.selfAccount;
 }
 @end

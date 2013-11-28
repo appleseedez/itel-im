@@ -68,20 +68,23 @@
 //加载“拨号中”界面
     //加载stroyboard
     UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-    IMCallingViewController* callingViewController = [sb instantiateViewControllerWithIdentifier:CALLING_VIEW_CONTROLLER_ID];
+    UINavigationController* callingViewNavController = [sb instantiateViewControllerWithIdentifier:CALLING_VIEW_CONTROLLER_ID];
+    IMCallingViewController* callingViewController = (IMCallingViewController*) callingViewNavController.topViewController;
+//    IMCallingViewController* callingViewController = [sb instantiateViewControllerWithIdentifier:CALLING_VIEW_CONTROLLER_ID];
     callingViewController.manager = self.manager;
     callingViewController.callingNotify = notify;
-    [self presentViewController:callingViewController animated:YES completion:nil];
+    [self presentViewController:callingViewNavController animated:YES completion:nil];
 }
 - (void) presentAnsweringView:(NSNotification*) notify{
 #if ROOT_TABBAR_DEBUG
     NSLog(@"收到通知，将要加载AnsweringView");
 #endif
     UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-    
-    IMAnsweringViewController* answeringViewController = [sb instantiateViewControllerWithIdentifier:ANSWERING_VIEW_CONTROLLER_ID];
+   UINavigationController* answeringViewNavController =[sb instantiateViewControllerWithIdentifier:ANSWERING_VIEW_CONTROLLER_ID];
+    IMAnsweringViewController* answeringViewController = (IMAnsweringViewController*) answeringViewNavController.topViewController;
+//    IMAnsweringViewController* answeringViewController = [sb instantiateViewControllerWithIdentifier:ANSWERING_VIEW_CONTROLLER_ID];
     answeringViewController.manager = self.manager;
     answeringViewController.callingNotify = notify;
-    [self presentViewController:answeringViewController animated:YES completion:nil];
+    [self presentViewController:answeringViewNavController animated:YES completion:nil];
 }
 @end

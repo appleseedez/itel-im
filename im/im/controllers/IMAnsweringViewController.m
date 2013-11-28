@@ -70,16 +70,31 @@ void soundPlayCallback1(SystemSoundID soundId, void *clientData){
 #pragma mark - USER INTERACT
 - (IBAction)answerCall:(UIButton *)sender {
     [self.manager acceptSession:self.callingNotify];
-    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-    IMInSessionViewController* inSessionController = [sb instantiateViewControllerWithIdentifier:INSESSION_VIEW_CONTROLLER_ID];
-    inSessionController.manager = self.manager;
-    inSessionController.inSessionNotify = self.callingNotify;
-    [self presentViewController:inSessionController animated:YES completion:nil];
+//    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+//    IMInSessionViewController* inSessionController = [sb instantiateViewControllerWithIdentifier:INSESSION_VIEW_CONTROLLER_ID];
+//    [self presentViewController:inSessionController animated:YES completion:nil];
+//    [self dismissViewControllerAnimated:YES completion:nil];
+
+    [self performSegueWithIdentifier:@"acceptSessionSegue" sender:self];
+    
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"acceptSessionSegue"]) {
+        IMInSessionViewController* inSessionController = (IMInSessionViewController*) segue.destinationViewController;
+        IMAnsweringViewController* target = (IMAnsweringViewController*) sender;
+        inSessionController.manager = target.manager;
+        inSessionController.inSessionNotify = target.callingNotify;
+        
+    }
+}
 - (IBAction)refuseCall:(UIButton *)sender {
     //终止会话
-    [self.manager haltSession:nil];
+    NSMutableDictionary* refusedSessionNotifyMut = [self.callingNotify.userInfo mutableCopy];
+    [refusedSessionNotifyMut addEntriesFromDictionary:@{
+                                                  SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_REFUSE
+                                                  }];
+    [self.manager haltSession:refusedSessionNotifyMut];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 @end

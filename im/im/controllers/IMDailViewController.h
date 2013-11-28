@@ -15,5 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *peerAccount;
 - (IBAction)dialNumber:(UIButton *)sender;
 - (IBAction)backspace:(UIButton *)sender;
+@property (weak, nonatomic) IBOutlet UILabel *selfAccountLabel;
 
 @end
