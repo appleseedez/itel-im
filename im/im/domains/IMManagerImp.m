@@ -252,7 +252,11 @@
     NSLog(@"开始通话，停止session保持数据包的发送，开始获取p2p通道");
         
         NSLog(@"收到PEER的链路数据：%@",notify.userInfo);
-        [self.engine tunnelWith:notify.userInfo];
+        if (![self.engine tunnelWith:notify.userInfo]) {
+            [NSException exceptionWithName:@"p2p穿透失败" reason:@"p2p穿透失败" userInfo:nil];
+            return;
+        }
+        
         [self.engine startTransport];
         //通知view可以切换的到“通话中"界面了
         [[NSNotificationCenter defaultCenter] postNotificationName:PRESENT_INSESSION_VIEW_NOTIFICATION
@@ -287,7 +291,11 @@
     [self.keepSessionAlive invalidate];
     self.keepSessionAlive = nil;
     NSLog(@"接受通话请求，停止session保持数据包的发送，开始获取p2p通道");
-    [self.engine tunnelWith:notify.userInfo];
+    if (![self.engine tunnelWith:notify.userInfo]) {
+        [NSException exceptionWithName:@"p2p穿透失败" reason:@"p2p穿透失败" userInfo:nil];
+        return;
+    }
+    
     [self.engine startTransport];
 }
 

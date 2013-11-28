@@ -159,7 +159,9 @@ UIImageView* _pview_local;
     NSLog(@"通话参数：对方ssid：%i",argc.otherSsid);
     NSLog(@"通话参数：自己ssid：%i",argc.selfSsid);
     NSTimeInterval startTime = [[NSDate date] timeIntervalSince1970];
-    self.pInterfaceApi->GetP2PPeer(argc);
+    if (self.pInterfaceApi->GetP2PPeer(argc) != 0) {
+        return -1;
+    }
     NSTimeInterval endTime = [[NSDate date] timeIntervalSince1970];
     long long  dTime =endTime - startTime;
     NSLog(@"调用时间间隔：%@",[NSString stringWithFormat:@"%llu",dTime]);
