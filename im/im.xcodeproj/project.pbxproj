@@ -21,8 +21,8 @@
 		BA26C7B21829DD2800C5CD39 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA26C7911829DD2700C5CD39 /* UIKit.framework */; };
 		BA26C7BA1829DD2800C5CD39 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA26C7B81829DD2800C5CD39 /* InfoPlist.strings */; };
 		BA26C7BC1829DD2800C5CD39 /* imTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BA26C7BB1829DD2800C5CD39 /* imTests.m */; };
-		BA297B12184A48A100F23192 /* libAVInterface.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA297B0E184A48A100F23192 /* libAVInterface.a */; };
-		BA297B13184A48A100F23192 /* libAVInterface.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA297B0E184A48A100F23192 /* libAVInterface.a */; };
+		BA353CE4184B779700E1C0DD /* libAVInterface.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA353CE1184B779700E1C0DD /* libAVInterface.a */; };
+		BA353CE5184B779700E1C0DD /* libAVInterface.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA353CE1184B779700E1C0DD /* libAVInterface.a */; };
 		BA3AA064184201AF000EDF50 /* IMSessionRefuseMessageBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3AA063184201AF000EDF50 /* IMSessionRefuseMessageBuilder.m */; };
 		BA3AA065184201AF000EDF50 /* IMSessionRefuseMessageBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3AA063184201AF000EDF50 /* IMSessionRefuseMessageBuilder.m */; };
 		BA6C2A7918441CFD00F19330 /* IMRootTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6C2A7818441CFD00F19330 /* IMRootTabBarViewController.m */; };
@@ -137,11 +137,11 @@
 		BA26C7B71829DD2800C5CD39 /* imTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "imTests-Info.plist"; sourceTree = "<group>"; };
 		BA26C7B91829DD2800C5CD39 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BA26C7BB1829DD2800C5CD39 /* imTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = imTests.m; sourceTree = "<group>"; };
-		BA297B0C184A48A100F23192 /* APITypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APITypes.h; sourceTree = "<group>"; };
-		BA297B0D184A48A100F23192 /* AVInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVInterface.h; sourceTree = "<group>"; };
-		BA297B0E184A48A100F23192 /* libAVInterface.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAVInterface.a; sourceTree = "<group>"; };
-		BA297B0F184A48A100F23192 /* NatTypeImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NatTypeImpl.h; sourceTree = "<group>"; };
-		BA297B11184A48A100F23192 /* video_render_ios_view.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = video_render_ios_view.h; sourceTree = "<group>"; };
+		BA353CDF184B779700E1C0DD /* APITypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APITypes.h; sourceTree = "<group>"; };
+		BA353CE0184B779700E1C0DD /* AVInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVInterface.h; sourceTree = "<group>"; };
+		BA353CE1184B779700E1C0DD /* libAVInterface.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAVInterface.a; sourceTree = "<group>"; };
+		BA353CE2184B779700E1C0DD /* NatTypeImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NatTypeImpl.h; sourceTree = "<group>"; };
+		BA353CE3184B779700E1C0DD /* video_render_ios_view.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = video_render_ios_view.h; sourceTree = "<group>"; };
 		BA3AA062184201AF000EDF50 /* IMSessionRefuseMessageBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMSessionRefuseMessageBuilder.h; sourceTree = "<group>"; };
 		BA3AA063184201AF000EDF50 /* IMSessionRefuseMessageBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMSessionRefuseMessageBuilder.m; sourceTree = "<group>"; };
 		BA6C2A7718441CFD00F19330 /* IMRootTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMRootTabBarViewController.h; sourceTree = "<group>"; };
@@ -230,7 +230,7 @@
 				BA795AF8183C016300466D8E /* AVFoundation.framework in Frameworks */,
 				BA26C7901829DD2700C5CD39 /* CoreGraphics.framework in Frameworks */,
 				BA26C7921829DD2700C5CD39 /* UIKit.framework in Frameworks */,
-				BA297B12184A48A100F23192 /* libAVInterface.a in Frameworks */,
+				BA353CE4184B779700E1C0DD /* libAVInterface.a in Frameworks */,
 				BA26C78E1829DD2700C5CD39 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -241,7 +241,7 @@
 			files = (
 				BA26C7B01829DD2800C5CD39 /* XCTest.framework in Frameworks */,
 				BA26C7B21829DD2800C5CD39 /* UIKit.framework in Frameworks */,
-				BA297B13184A48A100F23192 /* libAVInterface.a in Frameworks */,
+				BA353CE5184B779700E1C0DD /* libAVInterface.a in Frameworks */,
 				BA26C7B11829DD2800C5CD39 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -317,7 +317,7 @@
 		BA26C7931829DD2700C5CD39 /* app */ = {
 			isa = PBXGroup;
 			children = (
-				BA297B0B184A48A100F23192 /* sdk */,
+				BA353CDE184B779700E1C0DD /* sdk */,
 				BA776617183C92C000F48419 /* md5 */,
 				BA795AE6183BF7C900466D8E /* interfaces */,
 				BA795AE5183BF61A00466D8E /* domains */,
@@ -406,14 +406,14 @@
 			path = views;
 			sourceTree = "<group>";
 		};
-		BA297B0B184A48A100F23192 /* sdk */ = {
+		BA353CDE184B779700E1C0DD /* sdk */ = {
 			isa = PBXGroup;
 			children = (
-				BA297B0C184A48A100F23192 /* APITypes.h */,
-				BA297B0D184A48A100F23192 /* AVInterface.h */,
-				BA297B0E184A48A100F23192 /* libAVInterface.a */,
-				BA297B0F184A48A100F23192 /* NatTypeImpl.h */,
-				BA297B11184A48A100F23192 /* video_render_ios_view.h */,
+				BA353CDF184B779700E1C0DD /* APITypes.h */,
+				BA353CE0184B779700E1C0DD /* AVInterface.h */,
+				BA353CE1184B779700E1C0DD /* libAVInterface.a */,
+				BA353CE2184B779700E1C0DD /* NatTypeImpl.h */,
+				BA353CE3184B779700E1C0DD /* video_render_ios_view.h */,
 			);
 			path = sdk;
 			sourceTree = "<group>";
@@ -939,6 +939,7 @@
 					"/Users/Pharaoh/Documents/workInItel/itel-im/im/im/sdk",
 				);
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "ED320C5F-BCDD-45E0-8F2D-5011F7D2D778";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -965,6 +966,7 @@
 					"/Users/Pharaoh/Documents/workInItel/itel-im/im/im/sdk",
 				);
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "ED320C5F-BCDD-45E0-8F2D-5011F7D2D778";
 				TARGETED_DEVICE_FAMILY = 1;

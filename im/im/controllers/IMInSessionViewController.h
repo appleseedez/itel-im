@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "IMManager.h"
-#import "video_render_ios_view.h"
+#include "video_render_ios_view.h"
 @interface IMInSessionViewController : UIViewController
 @property(nonatomic,weak) id<IMManager> manager;
 - (IBAction)endSession:(UIButton *)sender;

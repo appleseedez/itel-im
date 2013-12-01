@@ -46,7 +46,7 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
-                        <outlet property="remoteRenderView" destination="IA6-VN-6Q0" id="pLq-jZ-3Wh"/>
+                        <outlet property="remoteRenderView" destination="IA6-VN-6Q0" id="uCP-OO-UlG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pgW-lS-jE7" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -26,7 +26,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     //开启视频窗口，调整摄像头
 //    [self.remoteRenderView setupWidth:self.view.bounds.size.width AndHeight:self.view.bounds.size.height];
     [self.view sendSubviewToBack:self.remoteRenderView];
