@@ -51,7 +51,7 @@ static int soundCount;
                                                   SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_END
                                                   }];
     [self.manager haltSession:cancelCallNotifyMut];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self sessionClosed:nil];
 }
 
 - (void) setup{
@@ -70,11 +70,15 @@ static int soundCount;
     //终止拨号音
     AudioServicesRemoveSystemSoundCompletion(DIALING_SOUND_ID);
     AudioServicesDisposeSystemSoundID(DIALING_SOUND_ID);
+    [self removeNotifications];
 }
 -(void) registerNotifications{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(intoSession:) name:PRESENT_INSESSION_VIEW_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionClosed:) name:END_SESSION_NOTIFICATION object:nil];
 }
-
+-(void) removeNotifications{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 //循环播放声音
 void soundPlayCallback(SystemSoundID soundId, void *clientData){
     if (soundCount>9) {
@@ -85,16 +89,14 @@ void soundPlayCallback(SystemSoundID soundId, void *clientData){
     AudioServicesPlaySystemSound(DIALING_SOUND_ID);
 }
 
+- (void) sessionClosed:(NSNotification*) notify{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 #pragma mark - HANDLER
 - (void)intoSession:(NSNotification*) notify{
-//    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-//    IMInSessionViewController* insessionController = [sb instantiateViewControllerWithIdentifier:INSESSION_VIEW_CONTROLLER_ID];
     self.inSessionNotify = notify;
     [self performSegueWithIdentifier:@"sessionRequestAcceptedByPeerSegue" sender:self];
-//    [self presentViewController:insessionController animated:YES completion:nil];
-//    [self dismissViewControllerAnimated:YES completion:nil];
-    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{

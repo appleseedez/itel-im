@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "IMManager.h"
-#import "render_view.h"
+#import "video_render_ios_view.h"
 @interface IMInSessionViewController : UIViewController
 @property(nonatomic,weak) id<IMManager> manager;
 - (IBAction)endSession:(UIButton *)sender;
-@property (weak, nonatomic) IBOutlet RenderView *remoteRenderView;
+@property (weak, nonatomic) IBOutlet VideoRenderIosView *remoteRenderView;
 @property(nonatomic,strong) NSNotification* inSessionNotify;
 @end

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ConstantHeader.h"
-#import "render_view.h"
+#import "video_render_ios_view.h"
 @protocol IMManager <NSObject>
 - (NSString*) myAccount;
 //拨号
@@ -32,7 +32,7 @@
 - (void) lockScreenForSession;
 - (void) unlockScreenForSession;
 //设置视频输出窗口
-- (void) openScreen:(RenderView*) remoteRenderView;
+- (void) openScreen:(VideoRenderIosView*) remoteRenderView;
 //关闭视频窗口
 - (void) closeScreen;
 @end

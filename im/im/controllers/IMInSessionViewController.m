@@ -28,7 +28,8 @@
     [super viewDidLoad];
     
     //开启视频窗口，调整摄像头
-    [self.remoteRenderView setupWidth:self.view.bounds.size.width AndHeight:self.view.bounds.size.height];
+//    [self.remoteRenderView setupWidth:self.view.bounds.size.width AndHeight:self.view.bounds.size.height];
+    [self.view sendSubviewToBack:self.remoteRenderView];
     [self.manager openScreen:self.remoteRenderView];
 }
 - (void)viewDidAppear:(BOOL)animated{
@@ -58,19 +59,23 @@
 - (void) removeNotifications{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-- (void) sessionClosed:(NSInvocation*) notify{
+- (void) sessionClosed:(NSNotification*) notify{
+    //关闭视频窗口
+    if (self.remoteRenderView) {
+        [self.remoteRenderView removeFromSuperview];
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)endSession:(UIButton *)sender {
+    //构造通话结束信令
     NSMutableDictionary* endSessionDataMut = [self.inSessionNotify.userInfo mutableCopy];
     [endSessionDataMut addEntriesFromDictionary:@{
                                                   SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_END
                                                   }];
     
     NSLog(@"通话中界面的业务数据：%@",endSessionDataMut);
+    //终止会话
     [self.manager haltSession:endSessionDataMut];
-    //关闭视频窗口
-    [self.remoteRenderView removeFromSuperview];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self sessionClosed:nil];
 }
 @end

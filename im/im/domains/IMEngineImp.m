@@ -10,7 +10,7 @@
 #import "AVInterface.h"
 #import "NatTypeImpl.h"
 #import "ConstantHeader.h"
-#import "render_view.h"
+#import "video_render_ios_view.h"
 UIImageView* _pview_local;
 
 @interface IMEngineImp ()
@@ -98,7 +98,7 @@ UIImageView* _pview_local;
 }
 
 - (void)initMedia{
-    self.m_type = self.pInterfaceApi->MediaInit(SCREEN_WIDTH,SCREEN_HEIGHT,InitTypeVoeAndVie);
+    self.m_type = self.pInterfaceApi->MediaInit(SCREEN_WIDTH,SCREEN_HEIGHT,InitTypeNone);
     NSLog(@"媒体类型：%d",self.m_type);
 }
 
@@ -112,10 +112,14 @@ UIImageView* _pview_local;
     char self_inter_ip[16];
     uint16_t self_inter_port;
     //获取本机外网ip和端口
-    self.pInterfaceApi->GetSelfInterAddr([probeServerIP UTF8String], probeServerPort, self_inter_ip, self_inter_port);
-    self.currentInterIP =[NSString stringWithUTF8String:self_inter_ip];
+    int ret = self.pInterfaceApi->GetSelfInterAddr([probeServerIP UTF8String], probeServerPort, self_inter_ip, self_inter_port);
+    if (ret != 0) {
+        self.currentInterIP = @"";
+    }else{
+        self.currentInterIP =[NSString stringWithUTF8String:self_inter_ip];
+    }
     return @{
-            SESSION_PERIOD_FIELD_PEER_INTER_IP_KEY: [NSString stringWithUTF8String:self_inter_ip],
+            SESSION_PERIOD_FIELD_PEER_INTER_IP_KEY: self.currentInterIP,
              SESSION_PERIOD_FIELD_PEER_INTER_PORT_KEY:[NSNumber numberWithInt:self_inter_port],
              SESSION_PERIOD_FIELD_PEER_LOCAL_IP_KEY:[[self class] localAddress],
              SESSION_PERIOD_FIELD_PEER_LOCAL_PORT_KEY:[NSNumber numberWithInt:LOCAL_PORT]
@@ -197,11 +201,12 @@ UIImageView* _pview_local;
 }
 
 - (void)stopTransport{
-    self.pInterfaceApi->StopMedia(self.m_type);
+    bool ret = self.pInterfaceApi->StopMedia(self.m_type);
+    NSLog(@"关闭传输通道成功：%d",ret);
     //通知界面
-    [[NSNotificationCenter defaultCenter] postNotificationName:END_SESSION_NOTIFICATION object:nil userInfo:nil];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:END_SESSION_NOTIFICATION object:nil userInfo:nil];
 }
-- (void)openScreen:(RenderView*) remoteRenderView{
+- (void)openScreen:(VideoRenderIosView*) remoteRenderView{
     // 开启摄像头
     if (self.pInterfaceApi->StartCamera(1) >= 0)
     {
@@ -211,7 +216,6 @@ UIImageView* _pview_local;
     self.pInterfaceApi->VieAddRemoteRenderer((__bridge void*)remoteRenderView);
 }
 - (void)closeScreen{
-    
 }
 
 - (void)tearDown{

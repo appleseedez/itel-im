@@ -185,11 +185,13 @@
     }else if ([SESSION_HALT_FILED_ACTION_REFUSE isEqualToString:haltType]){
         [self endSession];
     }else if ([SESSION_HALT_FILED_ACTION_END isEqualToString:haltType]){
-        [self endSession];
         [self.engine stopTransport];
+        [self endSession];
     }else{
         //
     }
+    //通知界面，关闭相应的视图
+    [[NSNotificationCenter defaultCenter] postNotificationName:END_SESSION_NOTIFICATION object:nil userInfo:nil];
 }
 
 /**
@@ -208,6 +210,7 @@
                              SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY:[refuseData valueForKey:SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY],
                              SESSION_HALT_FIELD_TYPE_KEY:[refuseData valueForKey:SESSION_HALT_FIELD_TYPE_KEY]
                              };
+    NSLog(@"准备发送的终止信令：%@",params);
     self.messageBuilder = [[IMSessionRefuseMessageBuilder alloc] init];
     NSDictionary* data =  [self.messageBuilder buildWithParams:params];
     [self.communicator send:data];
@@ -270,6 +273,7 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:SESSION_PERIOD_REQ_NOTIFICATION object:nil userInfo:notify.userInfo];
     }else{//剩余的情况表明。当前正在通话中，应该拒绝 这里会是自动拒绝 
         // Todo 构造拒绝信令
+        NSLog(@"当前的对方号码为：%@",currentDest);
         NSDictionary* busyData = @{
                                      DATA_TYPE_KEY:[NSNumber numberWithInteger:SESSION_PERIOD_HALT_TYPE],
                                      SESSION_INIT_REQ_FIELD_SRC_ACCOUNT_KEY:currentDest,
@@ -315,6 +319,7 @@
     [self.engine initNetwork];
     [self.engine initMedia];
     [self endSession];
+    /*测试需要，自动生成随机号码*/
     self.selfAccount = [NSString stringWithFormat:@"%d",arc4random()%1000];
 }
 
@@ -379,11 +384,16 @@
 - (void) acceptSession:(NSNotification*) notify{
     [self sessionPeriodResponse:notify];
 }
+// 终止当前的通话
 - (void)haltSession:(NSDictionary*) data{
+    [self.engine stopTransport];
     [self sessionHaltRequest:data];
+    [self endSession];
+    //通知界面，关闭相应的视图
+    [[NSNotificationCenter defaultCenter] postNotificationName:END_SESSION_NOTIFICATION object:nil userInfo:nil];
 }
 
-- (void)openScreen:(RenderView *)remoteRenderView{
+- (void)openScreen:(VideoRenderIosView *)remoteRenderView{
     [self.engine openScreen:remoteRenderView];
 }
 - (void)closeScreen{

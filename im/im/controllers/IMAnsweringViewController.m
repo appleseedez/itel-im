@@ -51,11 +51,13 @@ static int soundCount;
     //系统声音播放是一个异步过程。要循环播放则必须借助回调
     AudioServicesAddSystemSoundCompletion(DIALING_SOUND_ID,NULL,NULL,soundPlayCallback1,NULL);
     AudioServicesPlaySystemSound(DIALING_SOUND_ID);
+    [self registerNotifications];
 }
 - (void) tearDown{
     //终止拨号音
     AudioServicesRemoveSystemSoundCompletion(DIALING_SOUND_ID);
     AudioServicesDisposeSystemSoundID(DIALING_SOUND_ID);
+    [self removeNotifications];
 }
 //循环播放声音
 void soundPlayCallback1(SystemSoundID soundId, void *clientData){
@@ -67,14 +69,19 @@ void soundPlayCallback1(SystemSoundID soundId, void *clientData){
     AudioServicesPlaySystemSound(DIALING_SOUND_ID);
 }
 
+- (void) registerNotifications{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionClosed:) name:END_SESSION_NOTIFICATION object:nil];
+}
+- (void) removeNotifications{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void) sessionClosed:(NSNotification*) notify{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 #pragma mark - USER INTERACT
 - (IBAction)answerCall:(UIButton *)sender {
     [self.manager acceptSession:self.callingNotify];
-//    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-//    IMInSessionViewController* inSessionController = [sb instantiateViewControllerWithIdentifier:INSESSION_VIEW_CONTROLLER_ID];
-//    [self presentViewController:inSessionController animated:YES completion:nil];
-//    [self dismissViewControllerAnimated:YES completion:nil];
-
     [self performSegueWithIdentifier:@"acceptSessionSegue" sender:self];
     
 }
@@ -95,6 +102,6 @@ void soundPlayCallback1(SystemSoundID soundId, void *clientData){
                                                   SESSION_HALT_FIELD_TYPE_KEY:SESSION_HALT_FILED_ACTION_REFUSE
                                                   }];
     [self.manager haltSession:refusedSessionNotifyMut];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self sessionClosed:nil];
 }
 @end
