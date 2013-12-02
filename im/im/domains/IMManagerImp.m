@@ -26,6 +26,9 @@
     self.messageBuilder = [[IMSessionInitMessageBuilder alloc] init];
     //通话查询请求数据的构造
     NSDictionary* data = [self.messageBuilder buildWithParams:@{SESSION_INIT_REQ_FIELD_DEST_ACCOUNT_KEY: destAccount}];
+#if SIGNAL_MESSAGE
+    NSLog(@"发起通话查询请求：%@",data);
+#endif
     // 发送信令数据到信令服务器
     [self.communicator send:data];
     // 转到 [self receive:];
@@ -40,6 +43,9 @@
                                                                 CMID_APP_LOGIN_SSS_REQ_FIELD_CERT_KEY:cert,
                                                                 CMID_APP_LOGIN_SSS_REQ_FIELD_TOKEN_KEY:token
                                                                 }];
+#if SIGNAL_MESSAGE
+    NSLog(@"信令服务器的验证请求：%@",data);
+#endif
     [self.communicator send:data];
 }
 
@@ -159,6 +165,9 @@
     [mergeData addEntriesFromDictionary:@{SESSION_PERIOD_FIELD_PEER_NAT_TYPE_KEY: [NSNumber numberWithInt:natType]}];
     // 构造通话数据请求
     NSDictionary* data = [self.messageBuilder buildWithParams:mergeData];
+#if SIGNAL_MESSAGE
+    NSLog(@"通话开始阶段的谈判过程，数据往来:%@",data);
+#endif
     [self.communicator send:data];
 }
 
@@ -230,6 +239,10 @@
 - (void) sessionInited:(NSNotification*) notify{
 #if MANAGER_DEBUG
     NSLog(@"收到通话查询响应~");
+#endif
+    
+#if SIGNAL_MESSAGE
+    NSLog(@"收到信令服务器的通话查询响应：%@",notify.userInfo);
 #endif
     NSMutableDictionary *data = [notify.userInfo mutableCopy];
     [data addEntriesFromDictionary:@{
@@ -307,6 +320,9 @@
 - (void) authHasResult:(NSNotification*) notify{
 #if MANAGER_DEBUG
     NSLog(@"收到信令服务器端帐号验证响应~");
+#endif
+#if SIGNAL_MESSAGE
+    NSLog(@"信令服务器的验证响应：%@",notify.userInfo);
 #endif
 }
 
