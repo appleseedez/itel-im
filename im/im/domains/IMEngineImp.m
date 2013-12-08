@@ -12,7 +12,6 @@
 #import "ConstantHeader.h"
 #import "video_render_ios_view.h"
 UIImageView* _pview_local;
-
 @interface IMEngineImp ()
 @property(nonatomic) CAVInterfaceAPI* pInterfaceApi;
 @property(nonatomic) InitType m_type;
@@ -62,7 +61,9 @@ UIImageView* _pview_local;
     }
     NSString *addr = wifiAddress ? wifiAddress : cellAddress;
     
+#if ENGINE_MESSAGE
     NSLog(@">>>>>>>>>本机ip地址: %@",addr);
+#endif
     return addr;
 }
 
@@ -100,6 +101,7 @@ UIImageView* _pview_local;
 - (void)initMedia{
     self.m_type = self.pInterfaceApi->MediaInit(SCREEN_WIDTH,SCREEN_HEIGHT,InitTypeNone);
     NSLog(@"媒体类型：%d",self.m_type);
+    _pview_local = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 144, 192)];
 }
 
 - (NatType)natType{
@@ -206,13 +208,14 @@ UIImageView* _pview_local;
     //通知界面
 //    [[NSNotificationCenter defaultCenter] postNotificationName:END_SESSION_NOTIFICATION object:nil userInfo:nil];
 }
-- (void)openScreen:(VideoRenderIosView*) remoteRenderView{
+- (void)openScreen:(VideoRenderIosView*) remoteRenderView localView:(UIView *)localView{
     // 开启摄像头
     if (self.pInterfaceApi->StartCamera(1) >= 0)
     {
         // 摆正摄像头位置
         self.pInterfaceApi->VieSetRotation([self getCameraOrientation:self.pInterfaceApi->VieGetCameraOrientation(0)]);
     }
+    [localView addSubview:_pview_local];
     self.pInterfaceApi->VieAddRemoteRenderer((__bridge void*)remoteRenderView);
 }
 - (void)closeScreen{

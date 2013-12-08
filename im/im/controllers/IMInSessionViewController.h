@@ -13,5 +13,6 @@
 @property(nonatomic,weak) id<IMManager> manager;
 - (IBAction)endSession:(UIButton *)sender;
 @property (weak, nonatomic) IBOutlet VideoRenderIosView *remoteRenderView;
+@property (weak, nonatomic) IBOutlet UIView *selfCamView;
 @property(nonatomic,strong) NSNotification* inSessionNotify;
 @end

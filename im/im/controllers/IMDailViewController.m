@@ -7,12 +7,10 @@
 //
 
 #import "IMDailViewController.h"
-#import "IMManager.h"
 #import "IMRootTabBarViewController.h"
 #import "ConstantHeader.h"
 #import <AudioToolbox/AudioToolbox.h>
 @interface IMDailViewController ()
-@property(nonatomic,weak) id<IMManager> manager;
 @property(nonatomic) NSDictionary* touchToneMap;
 @end
 
@@ -82,8 +80,7 @@
 }
 - (void) setup{
     [self registerNotifications];
-    IMRootTabBarViewController* root =(IMRootTabBarViewController*)self.tabBarController;
-    self.manager = root.manager;
+    self.selfAccountLabel.text = [NSString stringWithFormat:@"本机号码：%@", [self.manager myAccount]];
 }
 - (void) tearDown{
     [self removeNotifications];
@@ -95,7 +92,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 - (void) authOK:(NSNotification*) notify{
-    self.selfAccountLabel.text = [NSString stringWithFormat:@"本机号码：%@", [self.manager myAccount]];
 }
 
 - (IBAction)videoDialing:(UIButton *)sender {
@@ -126,5 +122,9 @@
     }
     NSString* temp = [self.peerAccount.text substringToIndex:length-1];
     self.peerAccount.text = temp;
+}
+
+- (IBAction)showRecentContactList:(UIButton *)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 @end

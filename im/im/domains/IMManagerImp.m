@@ -409,8 +409,8 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:END_SESSION_NOTIFICATION object:nil userInfo:nil];
 }
 
-- (void)openScreen:(VideoRenderIosView *)remoteRenderView{
-    [self.engine openScreen:remoteRenderView];
+- (void)openScreen:(VideoRenderIosView *)remoteRenderView localView:(UIView *)localView{
+    [self.engine openScreen:remoteRenderView localView:localView];
 }
 - (void)closeScreen{
 }

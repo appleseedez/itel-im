@@ -27,9 +27,8 @@
 {
     [super viewDidLoad];
     //开启视频窗口，调整摄像头
-//    [self.remoteRenderView setupWidth:self.view.bounds.size.width AndHeight:self.view.bounds.size.height];
     [self.view sendSubviewToBack:self.remoteRenderView];
-    [self.manager openScreen:self.remoteRenderView];
+    [self.manager openScreen:self.remoteRenderView localView:self.selfCamView];
 }
 - (void)viewDidAppear:(BOOL)animated{
     [self setup];
@@ -63,7 +62,7 @@
     if (self.remoteRenderView) {
         [self.remoteRenderView removeFromSuperview];
     }
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)endSession:(UIButton *)sender {
     //构造通话结束信令

@@ -25,6 +25,8 @@
 		BA353CE5184B779700E1C0DD /* libAVInterface.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA353CE1184B779700E1C0DD /* libAVInterface.a */; };
 		BA3AA064184201AF000EDF50 /* IMSessionRefuseMessageBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3AA063184201AF000EDF50 /* IMSessionRefuseMessageBuilder.m */; };
 		BA3AA065184201AF000EDF50 /* IMSessionRefuseMessageBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3AA063184201AF000EDF50 /* IMSessionRefuseMessageBuilder.m */; };
+		BA4F169D1851E39000451BE6 /* IMRecentContactListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4F169C1851E39000451BE6 /* IMRecentContactListViewController.m */; };
+		BA4F169E1851E39000451BE6 /* IMRecentContactListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4F169C1851E39000451BE6 /* IMRecentContactListViewController.m */; };
 		BA6C2A7918441CFD00F19330 /* IMRootTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6C2A7818441CFD00F19330 /* IMRootTabBarViewController.m */; };
 		BA6C2A7A18441CFD00F19330 /* IMRootTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6C2A7818441CFD00F19330 /* IMRootTabBarViewController.m */; };
 		BA6C2A7D18442B2600F19330 /* IMCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6C2A7C18442B2600F19330 /* IMCallingViewController.m */; };
@@ -144,6 +146,8 @@
 		BA353CE3184B779700E1C0DD /* video_render_ios_view.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = video_render_ios_view.h; sourceTree = "<group>"; };
 		BA3AA062184201AF000EDF50 /* IMSessionRefuseMessageBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMSessionRefuseMessageBuilder.h; sourceTree = "<group>"; };
 		BA3AA063184201AF000EDF50 /* IMSessionRefuseMessageBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMSessionRefuseMessageBuilder.m; sourceTree = "<group>"; };
+		BA4F169B1851E39000451BE6 /* IMRecentContactListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMRecentContactListViewController.h; sourceTree = "<group>"; };
+		BA4F169C1851E39000451BE6 /* IMRecentContactListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMRecentContactListViewController.m; sourceTree = "<group>"; };
 		BA6C2A7718441CFD00F19330 /* IMRootTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMRootTabBarViewController.h; sourceTree = "<group>"; };
 		BA6C2A7818441CFD00F19330 /* IMRootTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMRootTabBarViewController.m; sourceTree = "<group>"; };
 		BA6C2A7B18442B2600F19330 /* IMCallingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMCallingViewController.h; sourceTree = "<group>"; };
@@ -381,6 +385,8 @@
 				BA6C2A84184457A500F19330 /* IMDailViewController.m */,
 				BA6C2A87184495B600F19330 /* IMInSessionViewController.h */,
 				BA6C2A88184495B600F19330 /* IMInSessionViewController.m */,
+				BA4F169B1851E39000451BE6 /* IMRecentContactListViewController.h */,
+				BA4F169C1851E39000451BE6 /* IMRecentContactListViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -735,6 +741,7 @@
 				BAAA12B1183E7A770021C60D /* IMSessionPeriodResponseMessageBuilder.m in Sources */,
 				BA7765BF183C132800F48419 /* IMMessageParserImp.m in Sources */,
 				BA6C2A85184457A500F19330 /* IMDailViewController.m in Sources */,
+				BA4F169D1851E39000451BE6 /* IMRecentContactListViewController.m in Sources */,
 				BA776623183CBE7B00F48419 /* IMAuthMessageBuilder.m in Sources */,
 				BA26C79A1829DD2700C5CD39 /* main.m in Sources */,
 				BA7765B2183C05C200F48419 /* IMEngineImp.m in Sources */,
@@ -752,6 +759,7 @@
 				BA7765C4183C170500F48419 /* IMDataPool.m in Sources */,
 				BA776628183CC11E00F48419 /* IMSeqenceGen.m in Sources */,
 				BA6C2A821844311100F19330 /* IMAnsweringViewController.m in Sources */,
+				BA4F169E1851E39000451BE6 /* IMRecentContactListViewController.m in Sources */,
 				BA77661B183C92C000F48419 /* NSString+MD5.m in Sources */,
 				BA6C2A86184457A500F19330 /* IMDailViewController.m in Sources */,
 				BA776624183CBE7B00F48419 /* IMAuthMessageBuilder.m in Sources */,

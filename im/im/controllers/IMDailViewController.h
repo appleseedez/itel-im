@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "IMManager.h"
 @interface IMDailViewController : UIViewController
 - (IBAction)voiceDialing:(UIButton *)sender;
 - (IBAction)videoDialing:(UIButton *)sender;
@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *peerAccount;
 - (IBAction)dialNumber:(UIButton *)sender;
 - (IBAction)backspace:(UIButton *)sender;
+- (IBAction)showRecentContactList:(UIButton *)sender;
 @property (weak, nonatomic) IBOutlet UILabel *selfAccountLabel;
-
+@property (weak,nonatomic) id<IMManager> manager;
 @end

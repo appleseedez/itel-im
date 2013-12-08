@@ -63,6 +63,7 @@
     [requestData appendData:[NSData dataWithBytes:&pkgLength length:sizeof(uint16_t)]];
     [requestData appendData:jsonData];
     [requestData appendByte:'\0'];
+    // 5data\0
     /* send data to server.*/
     [self.sock writeData:[requestData copy] withTimeout:-1 tag:type];
     
@@ -152,6 +153,7 @@
 
 - (void)send:(NSDictionary*) data{
     NSInteger type = [[[data valueForKey:HEAD_SECTION_KEY] valueForKey:DATA_TYPE_KEY] integerValue];
+    NSLog(@"发送的数据格式：%@",data);
     [self sendRequest:data type:type];
 }
 

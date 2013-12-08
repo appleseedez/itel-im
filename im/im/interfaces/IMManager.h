@@ -32,7 +32,7 @@
 - (void) lockScreenForSession;
 - (void) unlockScreenForSession;
 //设置视频输出窗口
-- (void) openScreen:(VideoRenderIosView*) remoteRenderView;
+- (void) openScreen:(VideoRenderIosView*) remoteRenderView localView:(UIView*) localView;
 //关闭视频窗口
 - (void) closeScreen;
 @end

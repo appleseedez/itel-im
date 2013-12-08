@@ -43,12 +43,11 @@
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self removeNotifications];
 }
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [self removeNotifications];
 }
 #pragma mark - PRIVATE
 - (void) registerNotifications{
@@ -67,24 +66,24 @@
 #endif
 //加载“拨号中”界面
     //加载stroyboard
-    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+    UIStoryboard* sb = [UIStoryboard storyboardWithName:MAIN_STORY_BOARD bundle:nil];
     UINavigationController* callingViewNavController = [sb instantiateViewControllerWithIdentifier:CALLING_VIEW_CONTROLLER_ID];
     IMCallingViewController* callingViewController = (IMCallingViewController*) callingViewNavController.topViewController;
-//    IMCallingViewController* callingViewController = [sb instantiateViewControllerWithIdentifier:CALLING_VIEW_CONTROLLER_ID];
     callingViewController.manager = self.manager;
     callingViewController.callingNotify = notify;
-    [self presentViewController:callingViewNavController animated:YES completion:nil];
+    //获取到当前的顶层viewContorller
+    [self.presentedViewController presentViewController:callingViewNavController animated:YES completion:nil];
 }
 - (void) presentAnsweringView:(NSNotification*) notify{
 #if ROOT_TABBAR_DEBUG
     NSLog(@"收到通知，将要加载AnsweringView");
 #endif
-    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+    UIStoryboard* sb = [UIStoryboard storyboardWithName:MAIN_STORY_BOARD bundle:nil];
    UINavigationController* answeringViewNavController =[sb instantiateViewControllerWithIdentifier:ANSWERING_VIEW_CONTROLLER_ID];
     IMAnsweringViewController* answeringViewController = (IMAnsweringViewController*) answeringViewNavController.topViewController;
-//    IMAnsweringViewController* answeringViewController = [sb instantiateViewControllerWithIdentifier:ANSWERING_VIEW_CONTROLLER_ID];
     answeringViewController.manager = self.manager;
     answeringViewController.callingNotify = notify;
-    [self presentViewController:answeringViewNavController animated:YES completion:nil];
+    //获取到当前的顶层viewContorller
+    [self.presentedViewController presentViewController:answeringViewNavController animated:YES completion:nil];
 }
 @end
