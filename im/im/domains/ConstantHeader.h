@@ -101,4 +101,8 @@
 #define ANSWERING_VIEW_CONTROLLER_ID @"AnsweringView"
 #define INSESSION_VIEW_CONTROLLER_ID @"InSessionWithVoiceView"
 #define MAIN_STORY_BOARD @"Main_iPhone"
+
+#define SUGGEST_CELL_VIEW_IDENTIFIER @"SuggestCellView"
+
+#define STATUS_BAR_HEIGHT 30 // 顶部status bar的高度
 #endif

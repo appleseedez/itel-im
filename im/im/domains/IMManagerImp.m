@@ -188,6 +188,9 @@
 #if MANAGER_DEBUG
     NSLog(@"收到拒绝信令回复");
 #endif
+    // 关闭可能的保持session的包定时器
+    [self.keepSessionAlive invalidate];
+    
     NSString* haltType = [notify.userInfo valueForKey:SESSION_HALT_FIELD_TYPE_KEY];
     if ([SESSION_HALT_FILED_ACTION_BUSY isEqualToString:haltType]) {
         [self endSession];
@@ -212,6 +215,8 @@
 #if MANAGER_DEBUG
     NSLog(@"发送拒绝信令");
 #endif
+    //停止可能的保持session的包定时器
+    [self.keepSessionAlive invalidate];
     // 处理参数
     NSDictionary* params = @{
                              DATA_TYPE_KEY:[NSNumber numberWithInteger:SESSION_PERIOD_HALT_TYPE],

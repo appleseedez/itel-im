@@ -9,7 +9,7 @@
 #import "IMInSessionViewController.h"
 
 @interface IMInSessionViewController ()
-
+@property(nonatomic) BOOL hideHUD;
 @end
 
 @implementation IMInSessionViewController
@@ -75,5 +75,21 @@
     //终止会话
     [self.manager haltSession:endSessionDataMut];
     [self sessionClosed:nil];
+}
+- (IBAction)toggleHUD:(UITapGestureRecognizer *)sender {
+// 点击会让HUD收缩
+    if (!self.hideHUD) {
+        [UIView animateWithDuration:.3 delay:.2 options:UIViewAnimationCurveEaseInOut animations:^{
+            self.nameHUDView.center= CGPointMake(self.nameHUDView.center.x, self.nameHUDView.center.y-self.nameHUDView.bounds.size.height-STATUS_BAR_HEIGHT);
+            self.actionHUDView.center = CGPointMake(self.actionHUDView.center.x, self.actionHUDView.center.y+ self.actionHUDView.bounds.size.height);
+        } completion:nil];
+        self.hideHUD = YES;
+    }else{
+        [UIView animateWithDuration:.3 delay:.2 options:UIViewAnimationCurveEaseInOut animations:^{
+            self.nameHUDView.center= CGPointMake(self.nameHUDView.center.x, self.nameHUDView.center.y+self.nameHUDView.bounds.size.height+STATUS_BAR_HEIGHT);
+            self.actionHUDView.center = CGPointMake(self.actionHUDView.center.x, self.actionHUDView.center.y- self.actionHUDView.bounds.size.height);
+        } completion:nil];
+        self.hideHUD = NO;
+    }
 }
 @end

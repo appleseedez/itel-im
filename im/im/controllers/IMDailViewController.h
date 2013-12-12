@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "IMManager.h"
-@interface IMDailViewController : UIViewController
+@interface IMDailViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 - (IBAction)voiceDialing:(UIButton *)sender;
 - (IBAction)videoDialing:(UIButton *)sender;
 @property (weak, nonatomic) IBOutlet UIButton *backspaceButton;
@@ -18,4 +18,10 @@
 - (IBAction)showRecentContactList:(UIButton *)sender;
 @property (weak, nonatomic) IBOutlet UILabel *selfAccountLabel;
 @property (weak,nonatomic) id<IMManager> manager;
+@property (weak, nonatomic) IBOutlet UITableView *searchResultView;
+@property (weak, nonatomic) IBOutlet UIView *dailPanView;
+@property (weak, nonatomic) IBOutlet UIView *suggestBtnView;
+@property (weak, nonatomic) IBOutlet UIView *dialPanView;
+- (IBAction)autoFill:(UIButton *)sender;
+- (IBAction)expandSuggestResults:(UIButton *)sender;
 @end
